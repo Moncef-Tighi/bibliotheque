@@ -59,6 +59,8 @@ class APIFeatures {
         const title=this.queryString.title;
         const tags=this.queryString.author;
         const filter= {}
+        //Permet de chercher selon l'auteur, titre ou tag. 
+        //L'option "i" c'est pour dire que le string qu'on cherche peut être n'importe où
         if (author) filter.author={"$regex" : author, "$options": "i"}
         if (title) filter.title={"$regex" : title, "$options": "i"}
         if (tags) filter.tags={"$regex" : tags, "$options": "i"}
