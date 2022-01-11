@@ -17,7 +17,7 @@ const bookSchema = new mongoose.Schema({
         unique : true
     },
     desc : {
-        type : Text,
+        type : String,
         required : true
     },
     genre : String,
@@ -74,7 +74,7 @@ bookSchema.pre("save", function(next){
 //     next();
 // })
 
-const Review = mongoose.model("review", reviewSchema);
+const Book = mongoose.model("book", bookSchema);
 
 
-module.exports=Review;
+module.exports=Book;

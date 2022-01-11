@@ -1,12 +1,12 @@
-const Book = require("../models/bookModel.js");
-const AppError = require("../utilities/AppErrors.js");
+const Book = require("../models/bookModel");
+const AppError = require("../utilities/AppErrors");
 const {catchAsync}=require("./errorController");
 
 const getOne = function(request,response) {
 
 }
 const addBook = function(request,response) {
-    console.log(request);
+    console.log(request.body);
     response.status(200).json({
         status : "ok"
     })   
@@ -14,7 +14,7 @@ const addBook = function(request,response) {
 const getAll = function(request,response) {
     
 }
-modudle.exports={
+module.exports={
     getAll,
     addBook,
     getOne
