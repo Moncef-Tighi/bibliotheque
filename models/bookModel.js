@@ -4,8 +4,7 @@ const mongoose = require("mongoose");
 const bookSchema = new mongoose.Schema({
     isbn : {
         type : String,
-        required : true,
-        unique : true
+        default : "00000000"
     },
     author : {
         type : String,
@@ -25,7 +24,7 @@ const bookSchema = new mongoose.Schema({
     link: String,
     img : {
         type : String,
-        required :true
+        default : "default.jpg"
     },
     rating : {
         type : Number,
@@ -46,6 +45,7 @@ const bookSchema = new mongoose.Schema({
 
 bookSchema.index({genre : 1})
 bookSchema.index({author : 1})
+
 //bookSchema.index({tour : 1, user : 1}, {unique : true});
 
 bookSchema.pre("save", function(next){

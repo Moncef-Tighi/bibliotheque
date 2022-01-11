@@ -24,7 +24,7 @@ class APIFeatures {
             const sortBy= this.queryString.sort.split(",").join(" ");
             this.query= this.query.sort(sortBy);
         } else {
-            //Sort par défaut avec la date de création
+            //Sort par défaut avec le nombre de ratings, donc par popularité
             this.query= this.query.sort("-totalratings");
         }
 
@@ -38,7 +38,7 @@ class APIFeatures {
             this.query=this.query.select(fields);
         } else {
             //Par défaut, on enlève les fields utilisées par mangoDB
-            this.query=this.query.select("-__v");
+            this.query=this.query.select("-__v,id,_id");
         }
 
         return this;
@@ -64,11 +64,10 @@ class APIFeatures {
         if (author) filter.author={"$regex" : author, "$options": "i"}
         if (title) filter.title={"$regex" : title, "$options": "i"}
         if (tags) filter.tags={"$regex" : tags, "$options": "i"}
-        console.log(this.query);
 
         //Ce n'est pas idéal comme syntax mais je crois pas que c'est possible de chain les finds
         this.query= this.query.find(filter);
-        console.log(this.query);
+
         return this;
     }
 }
