@@ -21,25 +21,12 @@ const handleValidationErrorDB = function(error){
 };
 
 const sendErrorDev = function(error, request, response){
-    if (request.originalUrl.startsWith("/api")){
-        if (error.isOperational){
-            return response.status(error.statusCode).json({
+    return response.status(error.statusCode).json({
                 status : error.status,
                 error : error,
                 message : error.message,
                 stack : error.stack
-            })
-        //programming ou erreure inconnue  
-        } else {
-            return response.status(500).json({
-                status : "error",
-                message : "Something went wrong"
-            })
-        }
-    } 
-    return response.status(error.statusCode).render("error",{
-        message : error.message
-    })
+            }) 
     
 }
 

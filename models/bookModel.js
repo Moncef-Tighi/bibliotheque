@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 
 const bookSchema = new mongoose.Schema({
     isbn : {
-        type : Number,
+        type : String,
         required : true,
         unique : true
     },
@@ -18,7 +18,7 @@ const bookSchema = new mongoose.Schema({
     },
     desc : {
         type : String,
-        required : true
+        default : "Ce livre n'a aucune description."
     },
     genre : String,
     bookformat : String,
