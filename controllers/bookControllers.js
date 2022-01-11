@@ -21,6 +21,19 @@ const getOne = catchAsync(async function(request,response) {
 
 });
 
+const removeOne = catchAsync(async function(request,response) {
+    const requestedBook= await Book.findOneAndDelete({isbn : request.params.isbn});
+    if (!requestedBook) {
+        return next(new AppError("no document found with that id", 404))
+    };
+
+    response.status(200).json({       
+        status : "success",
+        data : null
+    })
+
+});
+
 const addBook = catchAsync(async function(request,response) {
     const newBook= await Book.create(request.body);
     response.status(200).json({
@@ -29,15 +42,17 @@ const addBook = catchAsync(async function(request,response) {
     })   
 })
 const getAll =  catchAsync(async function(request,response) {
+    console.log(request.query);
     const filtre=new APIFeatures(Book.find(request.filter), request.query)
         .filter()
         .sort()
         .projection()
         .paginate()
-        .search();
+        .search()
+        .minNumberOfRatings()
+        .minRating();
 
     const books = await filtre.query;
-
     if (!books) {
         return response.status(404).json({
             status: "error",
@@ -52,8 +67,30 @@ const getAll =  catchAsync(async function(request,response) {
     })
 
 });
+
+
+const topTag = catchAsync(async function(request, response, next){
+    request.query.tags=request.params.tags;
+    request.query.limit='100';
+    request.query.page='1';
+    next();
+})
+
+const bestTag = catchAsync(async function(request, response, next){
+    request.query.tags=request.params.tags;
+    request.query.limit='100';
+    request.query.page='1';
+    request.query.minNumberOfRatings="10000";
+    request.query.sort="-rating";
+
+    request.query.total
+    next();
+})
 module.exports={
     getAll,
     addBook,
-    getOne
+    getOne,
+    removeOne,
+    topTag,
+    bestTag
 }

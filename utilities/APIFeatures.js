@@ -7,7 +7,8 @@ class APIFeatures {
 
         const queryObject= {...this.queryString}; 
         //On a besoin d'une hard copie ici, d'ou le destructuring. C'est un objet
-        const excludedFields = ["page", "sort", "limit", "fields", "author", "title", "tags"];
+        const excludedFields = ["page", "sort", "limit", "fields", "author", 
+                                "title", "tags", "minNumberOfRatings", "minRating"];
         excludedFields.forEach(element=> delete queryObject[element]);
 
         // Advanced Filtering
@@ -38,7 +39,7 @@ class APIFeatures {
             this.query=this.query.select(fields);
         } else {
             //Par défaut, on enlève les fields utilisées par mangoDB
-            this.query=this.query.select("-__v,id,_id");
+            this.query=this.query.select(['-__v', '-id',"-_id"]);
         }
 
         return this;
@@ -57,18 +58,31 @@ class APIFeatures {
     search(){
         const author=this.queryString.author;
         const title=this.queryString.title;
-        const tags=this.queryString.author;
+        const tags=this.queryString.tags;
         const filter= {}
         //Permet de chercher selon l'auteur, titre ou tag. 
         //L'option "i" c'est pour dire que le string qu'on cherche peut être n'importe où
         if (author) filter.author={"$regex" : author, "$options": "i"}
         if (title) filter.title={"$regex" : title, "$options": "i"}
-        if (tags) filter.tags={"$regex" : tags, "$options": "i"}
-
+        if (tags) filter.genre={"$regex" : tags, "$options": "i"}
         //Ce n'est pas idéal comme syntax mais je crois pas que c'est possible de chain les finds
         this.query= this.query.find(filter);
 
         return this;
+    }
+    minNumberOfRatings(){
+        const minNumberOfRatings = this.queryString.minNumberOfRatings;
+        if (minNumberOfRatings) {
+            this.query.find({totalratings : {$gte : minNumberOfRatings}});
+        }
+        return this;
+    }
+    minRating(){
+        const minRating = this.queryString.minRating;
+        if (minRating){
+            this.query.find({rating : {$gte : minRating}});
+        }
+        return this
     }
 }
 
