@@ -7,7 +7,7 @@ class APIFeatures {
 
         const queryObject= {...this.queryString}; 
         //On a besoin d'une hard copie ici, d'ou le destructuring. C'est un objet
-        const excludedFields = ["page", "sort", "limit", "fields"];
+        const excludedFields = ["page", "sort", "limit", "fields", "author", "title", "tags"];
         excludedFields.forEach(element=> delete queryObject[element]);
 
         // Advanced Filtering
@@ -51,6 +51,22 @@ class APIFeatures {
 
         this.query= this.query.skip(skip).limit(limit);
 
+        return this;
+    }
+
+    search(){
+        const author=this.queryString.author;
+        const title=this.queryString.title;
+        const tags=this.queryString.author;
+        const filter= {}
+        if (author) filter.author={"$regex" : author, "$options": "i"}
+        if (title) filter.title={"$regex" : title, "$options": "i"}
+        if (tags) filter.tags={"$regex" : tags, "$options": "i"}
+        console.log(this.query);
+
+        //Ce n'est pas idéal comme syntax mais je crois pas que c'est possible de chain les finds
+        this.query= this.query.find(filter);
+        console.log(this.query);
         return this;
     }
 }

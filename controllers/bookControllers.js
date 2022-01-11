@@ -33,7 +33,8 @@ const getAll =  catchAsync(async function(request,response) {
         .filter()
         .sort()
         .projection()
-        .paginate();
+        .paginate()
+        .search();
 
     const books = await filtre.query;
 
