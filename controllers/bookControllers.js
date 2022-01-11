@@ -1,6 +1,10 @@
 const Book = require("../models/bookModel");
 const AppError = require("../utilities/AppErrors");
 const {catchAsync}=require("./errorController");
+const APIFeatures = require("../utilities/APIFeatures")
+
+
+
 
 const getOne = catchAsync(async function(request,response) {
     const requestedBook= await Book.findOne({isbn : request.params.isbn});
@@ -25,11 +29,25 @@ const addBook = catchAsync(async function(request,response) {
     })   
 })
 const getAll =  catchAsync(async function(request,response) {
-    const allBooks= await Book.find();
+    const filtre=new APIFeatures(Book.find(request.filter), request.query)
+        .filter()
+        .sort()
+        .projection()
+        .paginate();
+
+    const books = await filtre.query;
+
+    if (!books) {
+        return response.status(404).json({
+            status: "error",
+            message : "Aucun livre ne corresponds à cette querry"
+        })
+    }
+
     response.status(200).json({
         status: "ok",
-        length : allBooks.length,
-        allBooks
+        length : books.length,
+        books
     })
 
 });
