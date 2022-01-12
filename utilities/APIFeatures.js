@@ -35,6 +35,7 @@ class APIFeatures {
     projection() {
 
         if(this.queryString.fields) {
+            this.query.fields+="-__v,-id,-_id"
             const fields = this.queryString.fields.split(",").join(" ");
             this.query=this.query.select(fields);
         } else {

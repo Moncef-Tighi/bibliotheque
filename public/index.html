@@ -3,6 +3,7 @@
         <link rel="stylesheet" href="./css/main.css">
         <link rel="shortcut icon" type="image/jpg" href="./img/favicon.png"/>
         <script defer src="./javascript/counterAnimation.js"></script>
+        <script defer src="./javascript/fetchData.js"></script>
     </head>
 
     <body>
@@ -93,8 +94,11 @@
 
                     <img id="reading-image" src="./img/accueil-img.jpg" alt="">
 
-                    <h1>La bibliothèque contient actuellement <span id="livres"></span> livres 
-                        par <span id="auteurs"></span> auteurs</h1>
+                    <h1>La bibliothèque contient actuellement : </h1>
+                    <div id="counters">
+                        <div class="counter"><span id="livres"> </span> Livres</div>
+                        <div class="counter"><span id="auteurs"></span> auteurs</div>
+                    </div>
 
 
                     <aside id="quotes">
@@ -104,21 +108,21 @@
                         <h4>―</h4>
                     </aside>
 
-
-
-
-
-
-
-
-                    <p>
-                        Les données utilisées dans ce site peuvent être obtenu 
-                        <a href="https://www.kaggle.com/mdhamani/goodreads-books-100k">ici</a>
-                        Et leur accès est du domaine publique.
-                    </p>
                 </div>
             </section>
 
+            <h1>Les best sellerss: </h1>
+            <article id="featured_books">
+
+
+            </article>
+
+            <p>
+                Les données utilisées dans ce site peuvent être obtenu 
+                <a href="https://www.kaggle.com/mdhamani/goodreads-books-100k">ici</a>
+                Et leur accès est du domaine publique.
+            </p>
+    
         </div>
     </body>
 </html>

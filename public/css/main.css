@@ -160,8 +160,6 @@ svg {
     padding-left: 3vw;
 }
 
-
-
 #radio div {
     display: flex;
     align-items: center;
@@ -183,13 +181,46 @@ svg {
     list-style-type: none;
     font-size: 2rem;
     margin-left: 2px;
-    min-height: 100rem;
-
+    height: 55rem;
 }
 
-#accueil div img {
+#reading-image {
     width: 61vw;
 }
+
+.counter {
+    font-size: 36px;
+    background-image: linear-gradient(to right bottom, #7bff8b, #36da3d);
+    color: #fff;
+    align-items: center;
+    transition: all 0.2s;
+    padding: 0.5rem;
+    width: 12vw;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#counters {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+h1 {
+    text-align: center;
+    font-size: 30px;
+}
+
+.acceuil_illustration{
+    width: 15vw;
+}
+
+#featured_books{
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+}
+
 @media only screen and (max-width: 1200px) {
     .nav__list {
         flex-direction: column;
