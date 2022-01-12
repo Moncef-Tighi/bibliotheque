@@ -21,14 +21,21 @@
                     <span>Search</span>
                   </button>
                   <div id="radio">
-                    <input type="radio" class="target" name="target" value="title" checked>
-                    <label for="title">title</label><br>
-                    <input type="radio" class="target" name="target" value="author">
-                    <label for="author">author</label><br>
-                    <input type="radio" class="target"  name="target" value="tag">
-                    <label for="tag">tag</label>  
+                      <label>Recherché par : </label>
+                    <div>
+                        <input type="radio" class="target" name="target" value="title" checked>
+                        <label for="title">Titre</label><br>
+                    </div>
+                    <div>
+                        <input type="radio" class="target" name="target" value="author">
+                        <label for="author">Auteur</label><br>    
+                    </div>
+                    <div>
+                        <input type="radio" class="target"  name="target" value="tag">
+                        <label for="tag">Tag</label>      
+                    </div>
                   </div>
-                  <button class="advanced__btn">
+                  <button class="btn advanced__btn">
                     <svg class="advanced__icon">
                       <use href="./img/icons.svg#advanced-icon"></use>
                     </svg>
