@@ -31,12 +31,12 @@ body {
     display: flex;
     align-items: center;
     height: 100%;
+    margin-left: -65px;
 }
 .header__logo {
-    margin-right: 2rem;
-    margin-left: 2rem;
     height: 9.6rem;
     display: block;
+    z-index: 2;
 }
 .search__btn {
     font-weight: 600;
@@ -56,11 +56,13 @@ body {
     display: grid;
     padding-left: 3rem;
     transition: all 0.3s;
-    width: 45vw;
+    width: 40vw;
     place-content: space-between;
-    margin-top: 30px;
-    grid-template-columns: 1fr 120px;
-    grid-template-rows: 40% 30% 20%;
+    margin-top: 20px;
+    margin-right: 2vw;
+    margin-left: 3vw;
+    grid-template-columns: 1fr 130px;
+    grid-template-rows: 40% auto;
     grid-row-gap: 3px;
 }
 .search__field {
@@ -115,11 +117,16 @@ svg {
     align-items: center;
     transition: all 0.2s;
 }
+.advanced__btn {
+    background: none;
+    color: #37da3e;
+}
 
 .nav__list {
     list-style: none;
     display: flex;
-    height: 100%;
+    align-self: center;
+    width: 22vw;
 }
 
 .nav__item {
@@ -150,8 +157,11 @@ svg {
     font-weight: 700;
     appearance: none;
     justify-content: space-around;
-
+    padding-left: 3vw;
 }
+
+
+
 #radio div {
     display: flex;
     align-items: center;
@@ -173,6 +183,8 @@ svg {
     list-style-type: none;
     font-size: 2rem;
     margin-left: 2px;
+    min-height: 100rem;
+
 }
 
 #accueil div img {
@@ -181,7 +193,6 @@ svg {
 @media only screen and (max-width: 1200px) {
     .nav__list {
         flex-direction: column;
-        margin-top: 75px;
     }
 
     #radio {
