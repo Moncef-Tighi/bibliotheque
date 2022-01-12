@@ -6,7 +6,7 @@ function fetchThenjson(link) {
 }
 
 const accueil = async () => {
-    const data = await fetchThenjson(`${url}/books?page=1&limit=20&fields=author,title,img,isbn,rating,totalratings`);
+    const data = await fetchThenjson(`${url}/books?page=1&limit=21&fields=author,title,img,isbn,rating,totalratings`);
     data.books.forEach(book=>{
         let html=`
         <div>

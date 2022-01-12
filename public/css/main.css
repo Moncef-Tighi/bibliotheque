@@ -10,8 +10,7 @@ body {
     color: #615551;
     background-image: linear-gradient(to right bottom, #7bff8b91, #36da3d96),
      url("https://wallpaperaccess.com/full/2862101.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
+    background-attachment: fixed;
     min-height: calc(100vh - 8vw);
 }
 
@@ -218,9 +217,26 @@ h1 {
 
 #featured_books{
     display: grid;
-    grid-template-columns: repeat(5,1fr);
+    grid-template-columns: repeat(auto-fill,25.32vw);
+    padding: 2vw;
+    background: #f9f5f3;
+    border-top: 4px gold solid;
+    border-bottom: 4px gold solid;
+}
+#featured_books div {
+    background-color: white;
+    border-radius: 10px;
+    width: 21vw;
+    font-size: 2rem;
+    padding: 1vw;
+    margin-bottom: 1.75vw;
+    text-align-last: center;
 }
 
+#featured_books div h2 {
+    color: #37db7f;
+    text-align: justify;
+}
 @media only screen and (max-width: 1200px) {
     .nav__list {
         flex-direction: column;
