@@ -1,24 +1,40 @@
 <html>
     <head>
         <link rel="stylesheet" href="./css/main.css">
+        <link rel="shortcut icon" type="image/jpg" href="./img/favicon.png"/>
     </head>
 
     <body>
         <div class="container">
             <header class="header">
-                <img src="./img/logo.png" alt="Logo" class="header__logo" />
+                <img src="./img/favicon.png" alt="Logo" class="header__logo" />
                 <form class="search">
                   <input
                     type="text"
                     class="search__field"
-                    placeholder="Search over 1,000,000 recipes..."
+                    placeholder="Recherché plus de 100,000 livres..."
                   />
-                  <button class="btn search__btn">
+                  <button class="btn search__btn" type="submit">
                     <svg class="search__icon">
                       <use href="./img/icons.svg#icon-search"></use>
                     </svg>
                     <span>Search</span>
                   </button>
+                  <div id="radio">
+                    <input type="radio" class="target" name="target" value="title" checked>
+                    <label for="title">title</label><br>
+                    <input type="radio" class="target" name="target" value="author">
+                    <label for="author">author</label><br>
+                    <input type="radio" class="target"  name="target" value="tag">
+                    <label for="tag">tag</label>  
+                  </div>
+                  <button class="advanced__btn">
+                    <svg class="advanced__icon">
+                      <use href="./img/icons.svg#advanced-icon"></use>
+                    </svg>
+                    <span>Avancé</span>
+                  </button>
+                  
                 </form>
         
                 <nav class="nav">
@@ -28,7 +44,7 @@
                         <svg class="nav__icon">
                           <use href="./img/icons.svg#icon-edit"></use>
                         </svg>
-                        <span>Add recipe</span>
+                        <span>Nouveau livre</span>
                       </button>
                     </li>
                     <li class="nav__item">
