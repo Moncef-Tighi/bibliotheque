@@ -15,12 +15,22 @@ body {
     min-height: calc(100vh - 8vw);
 }
 
-.header {
-    grid-area: head;
+.header , #more-options{
+    /* grid-area: head; */
+    background-color: #f9f5f3;
+    /* display: flex; */
+    align-items: center;
+    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+    width: 85vw;
+    height: fit-content;
+}
+.header div{
     background-color: #f9f5f3;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    height: 100%;
 }
 .header__logo {
     margin-right: 2rem;
@@ -33,19 +43,13 @@ body {
     font-family: inherit;
 }
 .container {
-    max-width: 85vw;
-    min-height: 117rem;
+    max-width: 80vw;
+    min-height: 100rem;
     margin: 4vw auto;
     background-color: #fff;
     border-radius: 9px;
     overflow: hidden;
     box-shadow: 0 2rem 6rem 0.5rem rgb(97 85 81 / 20%);
-    display: grid;
-    grid-template-rows: 10rem minmax(100rem, auto);
-    grid-template-columns: 1fr 2fr;
-    grid-template-areas:
-        "head head"
-        "list recipe";
 }
 
 .search {
@@ -54,7 +58,7 @@ body {
     transition: all 0.3s;
     width: 45vw;
     place-content: space-between;
-    margin-top: 5vh;
+    margin-top: 30px;
     grid-template-columns: 1fr 120px;
     grid-template-rows: 40% 30% 20%;
     grid-row-gap: 3px;
@@ -67,6 +71,7 @@ body {
     font-size: 1.7rem;
     width: 100%;
     background-color: #fff;
+    text-align: center;
     /* border-radius: 10rem; */
 }
 .nav {
@@ -148,7 +153,8 @@ svg {
 
 }
 #radio div {
-    display: flex
+    display: flex;
+    align-items: center;
 }
 .target {
 
@@ -159,12 +165,29 @@ svg {
   
 }
 
+#accueil {
+    display: flex;
+}
+#accueil ul {
+    width: 34vh;
+    list-style-type: none;
+    font-size: 2rem;
+    margin-left: 2px;
+}
+
+#accueil div img {
+    width: 61vw;
+}
 @media only screen and (max-width: 1200px) {
     .nav__list {
         flex-direction: column;
-        margin-top: 3vh;
+        margin-top: 75px;
     }
-    .nav__item {
-        padding-top: 1.5vh;
+
+    #radio {
+        font-size: 1.2rem;
+    }
+    .search{
+        grid-row-gap: 10px;
     }
 }

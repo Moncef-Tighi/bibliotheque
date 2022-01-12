@@ -7,65 +7,115 @@
     <body>
         <div class="container">
             <header class="header">
-                <img src="./img/favicon.png" alt="Logo" class="header__logo" />
-                <form class="search">
-                  <input
-                    type="text"
-                    class="search__field"
-                    placeholder="Recherché plus de 100,000 livres..."
-                  />
-                  <button class="btn search__btn" type="submit">
-                    <svg class="search__icon">
-                      <use href="./img/icons.svg#icon-search"></use>
-                    </svg>
-                    <span>Search</span>
-                  </button>
-                  <div id="radio">
-                      <label>Recherché par : </label>
-                    <div>
-                        <input type="radio" class="target" name="target" value="title" checked>
-                        <label for="title">Titre</label><br>
-                    </div>
-                    <div>
-                        <input type="radio" class="target" name="target" value="author">
-                        <label for="author">Auteur</label><br>    
-                    </div>
-                    <div>
-                        <input type="radio" class="target"  name="target" value="tag">
-                        <label for="tag">Tag</label>      
-                    </div>
-                  </div>
-                  <button class="btn advanced__btn">
-                    <svg class="advanced__icon">
-                      <use href="./img/icons.svg#advanced-icon"></use>
-                    </svg>
-                    <span>Avancé</span>
-                  </button>
-                  
-                </form>
-        
-                <nav class="nav">
-                  <ul class="nav__list">
-                    <li class="nav__item">
-                      <button class="nav__btn nav__btn--add-recipe">
-                        <svg class="nav__icon">
-                          <use href="./img/icons.svg#icon-edit"></use>
+                <div>
+                    <img src="./img/favicon.png" alt="Logo" class="header__logo" />
+                    <form class="search">
+                    <input
+                        type="text"
+                        class="search__field"
+                        placeholder="Recherché plus de 100,000 livres..."
+                    />
+                    <button class="btn search__btn" type="submit">
+                        <svg class="search__icon">
+                        <use href="./img/icons.svg#icon-search"></use>
                         </svg>
-                        <span>Nouveau livre</span>
-                      </button>
-                    </li>
-                    <li class="nav__item">
-                      <button class="nav__btn nav__btn--bookmarks">
-                        <svg class="nav__icon">
-                          <use href="./img/icons.svg#icon-bookmark"></use>
+                        <span>Search</span>
+                    </button>
+                    <div id="radio">
+                        <label>Recherché par : </label>
+                        <div>
+                            <input type="radio" class="target" name="target" value="title" checked>
+                            <label for="title">Titre</label><br>
+                        </div>
+                        <div>
+                            <input type="radio" class="target" name="target" value="author">
+                            <label for="author">Auteur</label><br>    
+                        </div>
+                        <div>
+                            <input type="radio" class="target"  name="target" value="tag">
+                            <label for="tag">Tag</label>      
+                        </div>
+                    </div>
+                    <button class="btn advanced__btn">
+                        <svg class="advanced__icon">
+                        <use href="./img/icons.svg#advanced-icon"></use>
                         </svg>
-                        <span>Bookmarks</span>
-                      </button>
-                    </li>
-                  </ul>
-                </nav>
-              </header>
+                        <span>Avancé</span>
+                    </button>
+                
+                    </form>
+                    <nav class="nav">
+                    <ul class="nav__list">
+                        <li class="nav__item">
+                        <button class="nav__btn nav__btn--add-recipe">
+                            <svg class="nav__icon">
+                            <use href="./img/icons.svg#icon-edit"></use>
+                            </svg>
+                            <span>Nouveau livre</span>
+                        </button>
+                        </li>
+                        <li class="nav__item">
+                        <button class="nav__btn nav__btn--bookmarks">
+                            <svg class="nav__icon">
+                            <use href="./img/icons.svg#icon-bookmark"></use>
+                            </svg>
+                            <span>Bookmarks</span>
+                        </button>
+                        </li>
+                    </ul>
+                    </nav>
+                </div>
+                <div id="more-options">
 
+                </div>
+            </header>
+            <section id="accueil">
+
+                <ul>
+                    <li>Les meilleures livres : </li>
+                    <li>Top Fantasy</li>
+                    <li>Top Romance</li>
+                    <li>Top Histoire</li>
+                    <li>Top Science Fiction</li>
+                    <li>Top Horreur</li>
+                    <li>Top Non-Fiction</li>
+                    <li>Best Fantasy</li>
+                    <li>Best Romance</li>
+                    <li>Best Histoire</li>
+                    <li>Best Science Fiction</li>
+                    <li>Best Horreur</li>
+                    <li>Best Non-Fiction</li>
+
+                </ul>
+
+                <div>
+
+                    <img id="reading-image" src="./img/accueil-img.jpg" alt="">
+
+                    <h1>La bibliothèque contient actuellement 100000 livres par 25000 auteurs</h1>
+
+
+                    <aside id="quotes">
+                        <h2>Citation :</h2>
+                        <img>
+                        <i></i>
+                        <h4>―</h4>
+                    </aside>
+
+
+
+
+
+
+
+
+                    <p>
+                        Les données utilisées dans ce site peuvent être obtenu 
+                        <a href="https://www.kaggle.com/mdhamani/goodreads-books-100k">ici</a>
+                        Et leur accès est du domaine publique.
+                    </p>
+                </div>
+            </section>
 
         </div>
     </body>
