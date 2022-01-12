@@ -34,7 +34,8 @@ const bookSchema = new mongoose.Schema({
     totalratings : {
         type : Number,
         default : 0
-    }
+    },
+    slug : String
 
 },{
 
@@ -48,11 +49,10 @@ bookSchema.index({author : 1})
 
 //bookSchema.index({tour : 1, user : 1}, {unique : true});
 
-bookSchema.pre("save", function(next){
-    this.slug= slugify(this.title, {lower: true});
+bookSchema.pre("save",function(next){
+    this.slug=  slugify(this.title, {lower: true});
     next();
 });
-
 
 // reviewSchema.statics.calculateAverageRatings = async function(tourId){
 //     const stats= await this.aggregate([
@@ -74,7 +74,10 @@ bookSchema.pre("save", function(next){
 //     next();
 // })
 
+
 const Book = mongoose.model("book", bookSchema);
+
+
 
 
 module.exports=Book;

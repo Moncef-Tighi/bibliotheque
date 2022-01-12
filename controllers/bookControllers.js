@@ -2,7 +2,8 @@ const Book = require("../models/bookModel");
 const AppError = require("../utilities/AppErrors");
 const {catchAsync}=require("./errorController");
 const APIFeatures = require("../utilities/APIFeatures")
-
+const slugify= require("slugify");
+const { find } = require("../models/bookModel");
 
 
 
@@ -42,7 +43,7 @@ const addBook = catchAsync(async function(request,response) {
     })   
 })
 const getAll =  catchAsync(async function(request,response) {
-    console.log(request.query);
+
     const filtre=new APIFeatures(Book.find(request.filter), request.query)
         .filter()
         .sort()
@@ -51,6 +52,7 @@ const getAll =  catchAsync(async function(request,response) {
         .search()
         .minNumberOfRatings()
         .minRating();
+
 
     const books = await filtre.query;
     if (!books) {
