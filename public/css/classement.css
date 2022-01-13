@@ -7,19 +7,22 @@
     grid-template-columns: repeat(auto-fit,minmax(250px, 1fr));
     padding: 8rem 6rem;
     gap: 2vw;
+    background-color: white;
 }
 
 #classementContainer div{
     border-radius: 18px;
     overflow: hidden;
-    box-shadow: 0 1.5rem 4rem rgb(0 0 0 / 10%);
-    background-color: #fff;
+    box-shadow: 0 1.5rem 2rem rgb(0 0 0 / 10%);
+    background-color: var(--lightGrey);
     transition: 0.3s all;
     backface-visibility: hidden;
     display: flex;
     flex-direction: column;
     text-align: center;
     height: fit-content;
+    border: 1px solid var(--green);
+
 }
 
 #classementContainer h2, #classementContainer h3{
@@ -46,7 +49,7 @@
     color: black;
     display: flex;
     align-items: center;
-    background-color: var(--lighterGreen);
+    background-color: white;
     padding: 8px;
     margin-right: 3px;
     margin-left: 3px;
@@ -61,4 +64,54 @@
     margin-bottom: 10px;
     margin-top: 10px;
     align-self: center;
+}
+
+.number {
+    position: absolute;
+    z-index: 2;
+    font-weight: 800;
+    font-size: 50px;
+    margin: 0;
+    transform:translate(-34px, -40px);
+    color: var(--gold);
+}
+
+
+/*
+    ça c'est pour donner des couleurs aux tags slees plus communs
+*/
+.fantasy {
+    background-color: gold;
+}
+.fiction {
+    background-color: var(--lighterGreen);
+}
+.romance {
+    background-color: lightpink;
+}
+.science {
+    background-color: lightskyblue;
+}
+.horror {
+    color: white;
+    background-color: black;
+}
+.nonfiction {
+    background-color: lightgray;
+}
+.Thriller {
+    background-color: grey;
+}
+.young {
+    background-color: blue;
+    color: white;
+}
+.classics {
+    background-color: burlywood;
+}
+.crime {
+    background-color: #fd7b7b;
+}
+.mystery {
+    background-color: orange;
 }

@@ -53,10 +53,11 @@ const fetchClassement= async function(type,tag) {
         classement.style.display="block";
         document.querySelector('#titre-classement').innerText=`${type}-100 catégorie ${tag}`
         classementContainer.innerHTML="";
-        data.books.forEach(book=>{
+        data.books.forEach( (book, i)=>{
             const tags= book.genre.split(",")
             let html=`
             <div>
+                <h1 class='number'>#${i+1}</h1>
                 <img src="${book.img}" class="classement_illustration">
                 <h2>${book.title}</h2>
                 <h3>By - ${book.author.split(",")[0]}</h3>
