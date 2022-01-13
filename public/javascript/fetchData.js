@@ -12,8 +12,8 @@ function fetchThenjson(link) {
 }
 
 const previousIcon= document.querySelectorAll(".previous");
-previousIcon.forEach(icon=> {icon.addEventListener("click", (event) => {
-        console.log(event.target);
+previousIcon.forEach(icon=> {
+    icon.addEventListener("click", (event) => {
         event.preventDefault();
         classement.style.display="none";
         accueil.style.display="block";
@@ -46,20 +46,29 @@ accueilDisplay();
 */
 
 const fetchClassement= async function(type,tag) {
+    
     const data = await fetchThenjson(`${url}/books/${type}-100/${tag}`);
     if (data) {
         accueil.style.display="none";
         classement.style.display="block";
-        
+        document.querySelector('#titre-classement').innerText=`${type}-100 catégorie ${tag}`
+        classementContainer.innerHTML="";
         data.books.forEach(book=>{
+            const tags= book.genre.split(",")
             let html=`
             <div>
-                <h2>${book.title}</h2>
                 <img src="${book.img}" class="classement_illustration">
-                <h3>${book.author.split(",")[0]}</h3>
+                <h2>${book.title}</h2>
+                <h3>By - ${book.author.split(",")[0]}</h3>
                 <span>${book.rating} (${book.totalratings})</span>
+                <ul class="tagList">
+                    <li class="tags ${tags[0]}">${tags[0]}</li>
+                    <li class="tags ${tags[1]}">${tags[1]}</li>
+                    <li class="tags ${tags[2]}">${tags[2]}</li>
+                </ul>
             </div>
             `
+            
             classementContainer.insertAdjacentHTML("beforeend", html);
         })       
     }
