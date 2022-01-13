@@ -1,3 +1,29 @@
 #classement {
     display: none;
 }
+
+#classementContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(180px, 1fr));
+    padding: 2vw;
+    column-gap: 4vw;
+}
+
+#classementContainer div{
+    background: var(--gradient);
+    padding: 3%;
+}
+
+#classementContainer h2, #classementContainer h3{
+    font-size: 1.5em;
+    margin : 0;
+}
+
+.classement_illustration{
+    width: 100%;
+}
+
+.previous {
+    width: 50px;
+    cursor: pointer;
+}
