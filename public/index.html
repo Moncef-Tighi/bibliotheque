@@ -1,6 +1,8 @@
 <html>
     <head>
         <link rel="stylesheet" href="./css/main.css">
+        <link rel="stylesheet" href="./css/classement.css">
+
         <link rel="shortcut icon" type="image/jpg" href="./img/favicon.png"/>
         <script defer src="./javascript/counterAnimation.js"></script>
         <script defer src="./javascript/fetchData.js"></script>
@@ -71,52 +73,58 @@
 
                 </div>
             </header>
-            <section id="accueil">
+            <div id="accueil">
+                <section id="accueil_start">
 
-                <ul>
-                    <li>Les meilleures livres : </li>
-                    <li>Top Fantasy</li>
-                    <li>Top Romance</li>
-                    <li>Top Histoire</li>
-                    <li>Top Science Fiction</li>
-                    <li>Top Horreur</li>
-                    <li>Top Non-Fiction</li>
-                    <li>Best Fantasy</li>
-                    <li>Best Romance</li>
-                    <li>Best Histoire</li>
-                    <li>Best Science Fiction</li>
-                    <li>Best Horreur</li>
-                    <li>Best Non-Fiction</li>
+                    <ul>
+                        <li>Les meilleures livres : </li>
+                        <li><a class='top'href="#" data-tag="Fantasy">Top Fantasy</a></li>
+                        <li><a class='top'href="#" data-tag="Romance">Top Romance</a></li>
+                        <li><a class='top'href="#"data-tag="History">Top Histoire</a></li>
+                        <li><a class='top'href="#"data-tag=" Science Fiction">Top Science Fiction</a></li>
+                        <li><a class='top'href="#"data-tag="Horror">Top Horreur</a></li>
+                        <li><a class='top' href="#"data-tag="Non-Fiction">Top Non-Fiction</a></li>
+                        <li><a class='best'href="#"data-tag="Fantasy">Best Fantasy</a></li>
+                        <li><a class='best'href="#"data-tag="Romance">Best Romance</a></li>
+                        <li><a class='best'href="#"data-tag="History">Best Histoire</a></li>
+                        <li><a class='best'href="#"data-tag="Science Fiction">Best Science Fiction</a></li>
+                        <li><a class='best'href="#"data-tag="Horror">Best Horreur</a></li>
+                        <li><a class='best'href="#"data-tag="Non-Fiction">Best Non-Fiction</a></li>
 
-                </ul>
+                    </ul>
 
-                <div>
+                    <div>
 
-                    <img id="reading-image" src="./img/accueil-img.jpg" alt="">
+                        <img id="reading-image" src="./img/accueil-img.jpg" alt="">
 
-                    <h1>La bibliothèque contient actuellement : </h1>
-                    <div id="counters">
-                        <div class="counter"><span id="livres"> </span> Livres</div>
-                        <div class="counter"><span id="auteurs"></span> auteurs</div>
+                        <h1>La bibliothèque contient actuellement : </h1>
+                        <div id="counters">
+                            <div class="counter"><span id="livres"> </span> Livres</div>
+                            <div class="counter"><span id="auteurs"></span> auteurs</div>
+                        </div>
+
+
+                        <aside id="quotes">
+                            <h2>Citation :</h2>
+                            <img>
+                            <i></i>
+                            <h4>―</h4>
+                        </aside>
+
                     </div>
+                </section>
+
+                <h1 style="font-size: 60px;">Les best sellers: </h1>
+                <article id="featured_books">
 
 
-                    <aside id="quotes">
-                        <h2>Citation :</h2>
-                        <img>
-                        <i></i>
-                        <h4>―</h4>
-                    </aside>
-
-                </div>
-            </section>
-
-            <h1 style="font-size: 60px;">Les best sellers: </h1>
-            <article id="featured_books">
-
-
-            </article>
-
+                </article>
+            </div>
+            <div id="classement">
+                <svg class="advanced__icon">
+                    <use href="./img/previous.svg" class="previous"></use>
+                </svg>
+            </div>
             <p>
                 Les données utilisées dans ce site peuvent être obtenu 
                 <a href="https://www.kaggle.com/mdhamani/goodreads-books-100k">ici</a>

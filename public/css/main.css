@@ -1,3 +1,12 @@
+:root {
+    --green :#36da3d;
+    --lighterGreen:#7bff8b ;
+    --gold : gold;
+    --lightGrey : #f9f5f3;
+    --gradient:linear-gradient(to right bottom, var(--lighterGreen), var(--green)) ;
+}
+
+
 html {
     box-sizing: border-box;
     font-size: 62.5%;
@@ -16,7 +25,7 @@ body {
 
 .header , #more-options{
     /* grid-area: head; */
-    background-color: #f9f5f3;
+    background-color: var(--lightGrey);
     /* display: flex; */
     align-items: center;
     justify-content: space-between;
@@ -26,7 +35,7 @@ body {
     height: fit-content;
 }
 .header div{
-    background-color: #f9f5f3;
+    background-color: var(--lightGrey);
     display: flex;
     align-items: center;
     height: 100%;
@@ -92,7 +101,7 @@ body {
     transform: translateY(-1px);
 }
 svg {
-    fill: #36da3d;
+    fill: var(--green);
 }
 .btn {
     padding: 1.5rem 1.5rem;
@@ -106,7 +115,7 @@ svg {
     fill: currentColor;
 }
 .btn--small, .btn--small:link, .btn--small:visited, .btn {
-    background-image: linear-gradient(to right bottom, #7bff8b, #36da3d);
+    background-image: var(--gradient);
     /* border-radius: 10rem; */
     border: none;
     text-transform: uppercase;
@@ -118,7 +127,7 @@ svg {
 }
 .advanced__btn {
     background: none;
-    color: #37da3e;
+    color: var(--green);
 }
 
 .nav__list {
@@ -172,15 +181,18 @@ svg {
   
 }
 
-#accueil {
+#accueil_start {
     display: flex;
 }
-#accueil ul {
+#accueil_start ul {
     width: 34vh;
     list-style-type: none;
     font-size: 2rem;
     margin-left: 2px;
     height: 55rem;
+    line-height: 3vw;
+    font-size: 2.25rem;
+
 }
 
 #reading-image {
@@ -189,7 +201,7 @@ svg {
 
 .counter {
     font-size: 36px;
-    background-image: linear-gradient(to right bottom, #7bff8b, #36da3d);
+    background-image: var(--gradient);
     color: #fff;
     align-items: center;
     transition: all 0.2s;
@@ -219,9 +231,9 @@ h1 {
     display: grid;
     grid-template-columns: repeat(auto-fill,25.32vw);
     padding: 2vw;
-    background: #f9f5f3;
-    border-top: 4px gold solid;
-    border-bottom: 4px gold solid;
+    background: var(--lightGrey);
+    border-top: 4px var(--gold) solid;
+    border-bottom: 4px var(--gold) solid;
 }
 #featured_books div {
     background-color: white;
@@ -234,8 +246,22 @@ h1 {
 }
 
 #featured_books div h2 {
-    color: #37db7f;
+    color: var(--green);
     text-align: justify;
+    margin: 0;
+    padding-bottom: 2vw;
+}
+#featured_books div h3 {
+    text-align: justify;
+    margin: 0;
+    padding-bottom: 0.5vw;
+}
+
+a {
+    color: var(--green);
+}
+a:active {
+    color: var(--gold);
 }
 @media only screen and (max-width: 1200px) {
     .nav__list {

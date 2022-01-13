@@ -26,5 +26,5 @@ function animate(obj, initVal, lastVal, duration) {
 let text1 = document.getElementById('auteurs');
 let text2 = document.getElementById('livres');
 
-animate(text1, 0, 36580, 6000);
-animate(text2, 0, 98732, 8000);
+animate(text1, 0, 46580, 5000);
+animate(text2, 0, 98732, 7000);
