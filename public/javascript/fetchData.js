@@ -1,11 +1,16 @@
 const url = "http://127.0.0.1:3000/api/v1";
 const accueilContainer= document.querySelector("#featured_books")
 const linkBest = document.querySelectorAll(".best");
-const linkTop = document.querySelectorAll(".top")
+const linkTop = document.querySelectorAll(".top");
 const accueil = document.querySelector("#accueil");
 const classement= document.querySelector("#classement");
 const classementContainer = document.querySelector("#classementContainer");
+const recherche= document.querySelector("#recherche");
 
+
+const searchForm=document.querySelector(".search")
+const searchField=document.querySelector(".search__field");
+const radioButtons = document.querySelectorAll(".target");
 
 /*
     Les images des étoiles sont en SVG, c'est plus simple de les passer via JS
@@ -72,6 +77,7 @@ const fetchClassement= async function(type,tag) {
     if (data) {
         accueil.style.display="none";
         classement.style.display="block";
+        recherche.style.display="none";
         document.querySelector('#titre-classement').innerText=`${type}-100 catégorie ${tag}`
         classementContainer.innerHTML="";
         data.books.forEach( (book, i)=>{
@@ -95,6 +101,48 @@ const fetchClassement= async function(type,tag) {
         })       
     }
 }
+
+searchForm.addEventListener("submit",async (event)=> {
+    event.preventDefault();
+    let link=`${url}/books?page=1&limit=20`;
+    if(radioButtons[0].active) link+=`&title=`;
+    if(radioButtons[1].active) link+=`&author=`;
+    if(radioButtons[2].active) link+=`&tags=`;
+    link+=searchField.value;
+    const data = await fetchThenjson(link);
+    console.log(data);
+    accueil.style.display="none";
+    classement.style.display="none";
+    recherche.style.display="block";
+    if (data) {
+        document.querySelector('#titre-recherche').innerText=`x livres correspondent à cette recherche`
+        rechercheContainer.innerHTML="";
+        data.books.forEach( (book, i)=>{
+            const tags= book.genre.split(",");
+            let html=`
+            <div>
+                <img src="${book.img}" class="recherche_illustration">
+                <h2>${book.title}</h2>
+                <h3>By - ${book.author.split(",")[0]}</h3>
+                <span>${getStars(book.rating)}${book.rating} (${book.totalratings})</span>
+                <ul class="tagList">
+                    <li class="tags ${tags[0]}">${tags[0]}</li>
+                    <li class="tags ${tags[1]}">${tags[1]}</li>
+                    <li class="tags ${tags[2]}">${tags[2]}</li>
+                </ul>
+            </div>
+            `
+            
+            rechercheContainer.insertAdjacentHTML("beforeend", html);
+        })       
+    } else {
+        document.querySelector('#titre-recherche').innerText=`Aucune livre ne corresponds à cette recherche...`
+    }
+
+})
+
+
+
 
 const linkController = function(event) {
     event.preventDefault();
