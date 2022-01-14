@@ -105,12 +105,12 @@ const fetchClassement= async function(type,tag) {
 searchForm.addEventListener("submit",async (event)=> {
     event.preventDefault();
     let link=`${url}/books?page=1&limit=20`;
-    if(radioButtons[0].active) link+=`&title=`;
-    if(radioButtons[1].active) link+=`&author=`;
-    if(radioButtons[2].active) link+=`&tags=`;
+    if(radioButtons[0].checked) link+=`&title=`;
+    if(radioButtons[1].checked) link+=`&author=`;
+    if(radioButtons[2].checked) link+=`&tags=`;
     link+=searchField.value;
     const data = await fetchThenjson(link);
-    console.log(data);
+    console.log(link);
     accueil.style.display="none";
     classement.style.display="none";
     recherche.style.display="block";

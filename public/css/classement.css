@@ -2,7 +2,7 @@
     display: none;
 }
 
-#classementContainer {
+#classementContainer, #rechercheContainer {
     display: grid;
     grid-template-columns: repeat(auto-fit,minmax(250px, 1fr));
     padding: 8rem 6rem;
@@ -10,7 +10,7 @@
     background-color: white;
 }
 
-#classementContainer div{
+#classementContainer div, #rechercheContainer div{
     border-radius: 18px;
     overflow: hidden;
     box-shadow: 0 1.5rem 2rem rgb(0 0 0 / 10%);
@@ -25,12 +25,13 @@
 
 }
 
-#classementContainer h2, #classementContainer h3{
+#classementContainer h2, #classementContainer h3,
+#rechercheContainer h2, #rechercheContainer h3{
     font-size: 1.5em;
     margin : 0;
 }
 
-.classement_illustration{
+.classement_illustration, .recherche_illustration{
     width: 100%;
 }
 
