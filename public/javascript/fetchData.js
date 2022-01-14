@@ -24,6 +24,18 @@ function fetchThenjson(link) {
     return fetch(link).then(response => response.json())
 }
 
+
+/*
+    Fonction utilitaire
+*/
+
+const hide = function(){
+    classement.style.display="none";
+    accueil.style.display="none";
+    recherche.style.display="none";
+
+}
+
 const getStars = function(rating){
     let i=1;
     let output=""
@@ -41,7 +53,7 @@ const previousIcon= document.querySelectorAll(".previous");
 previousIcon.forEach(icon=> {
     icon.addEventListener("click", (event) => {
         event.preventDefault();
-        classement.style.display="none";
+        hide();
         accueil.style.display="block";
     })
 });
@@ -67,6 +79,7 @@ const accueilDisplay = async () => {
 } 
 accueilDisplay();
 
+
 /*
     Partie dédiée aux pages classements : 
 */
@@ -75,9 +88,8 @@ const fetchClassement= async function(type,tag) {
     
     const data = await fetchThenjson(`${url}/books/${type}-100/${tag}`);
     if (data) {
-        accueil.style.display="none";
+        hide();
         classement.style.display="block";
-        recherche.style.display="none";
         document.querySelector('#titre-classement').innerText=`${type}-100 catégorie ${tag}`
         classementContainer.innerHTML="";
         data.books.forEach( (book, i)=>{
@@ -102,20 +114,38 @@ const fetchClassement= async function(type,tag) {
     }
 }
 
+
+
+const linkController = function(event) {
+    event.preventDefault();
+    fetchClassement(event.target.classList[0], event.target.dataset.tag)
+}
+
+linkBest.forEach(link=> link.addEventListener("click", linkController) );
+linkTop.forEach(link=> link.addEventListener("click", linkController) );
+
+
+
+
+/*
+    Partie dédiée au résultat d'une recherche de livre
+*/
+
 searchForm.addEventListener("submit",async (event)=> {
     event.preventDefault();
+
     let link=`${url}/books?page=1&limit=20`;
     if(radioButtons[0].checked) link+=`&title=`;
     if(radioButtons[1].checked) link+=`&author=`;
     if(radioButtons[2].checked) link+=`&tags=`;
     link+=searchField.value;
     const data = await fetchThenjson(link);
-    console.log(link);
-    accueil.style.display="none";
-    classement.style.display="none";
+
+    hide();
     recherche.style.display="block";
-    if (data) {
+    if (data.lenth===0) {
         document.querySelector('#titre-recherche').innerText=`x livres correspondent à cette recherche`
+        
         rechercheContainer.innerHTML="";
         data.books.forEach( (book, i)=>{
             const tags= book.genre.split(",");
@@ -140,14 +170,3 @@ searchForm.addEventListener("submit",async (event)=> {
     }
 
 })
-
-
-
-
-const linkController = function(event) {
-    event.preventDefault();
-    fetchClassement(event.target.classList[0], event.target.dataset.tag)
-}
-
-linkBest.forEach(link=> link.addEventListener("click", linkController) );
-linkTop.forEach(link=> link.addEventListener("click", linkController) );
