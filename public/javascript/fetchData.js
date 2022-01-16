@@ -64,12 +64,9 @@ previousIcon.forEach(icon=> {
     Affichage de l'accueil
 */
 
-const fetchAccueil= async function(){
-    const data = await fetchThenjson(`${url}/books?page=1&limit=21&fields=author,title,img,isbn,rating,totalratings`);
-    accueilDisplay(data);
-}
-
-const accueilDisplay = (data) => {
+const displayAccueil =  function(data) {
+    hide();
+    accueil.style.display="block";
     data.books.forEach(book=>{
         let html=`
         <div>
@@ -82,7 +79,17 @@ const accueilDisplay = (data) => {
         accueilContainer.insertAdjacentHTML("beforeend", html)
     })
 } 
+
+
+const fetchAccueil= async function(){
+    const data = await fetchThenjson(`${url}/books?page=1&limit=21&fields=author,title,img,isbn,rating,totalratings`);
+    displayAccueil(data);
+    window.history.pushState({location: "acceuil", data}, "accueil", "/");
+}
+
+window.history.replaceState({}, null, "");
 fetchAccueil();
+
 
 
 /*
@@ -91,9 +98,9 @@ fetchAccueil();
 
 const displayClassement = function(data) {
     if (data) {
-        
+        hide();
         classement.style.display="block";
-        document.querySelector('#titre-classement').innerText=`${type}-100 catégorie ${tag}`
+        document.querySelector('#titre-classement').innerText=`${data.type}-100 catégorie ${data.tag}`
         classementContainer.innerHTML="";
         data.books.forEach( (book, i)=>{
             const tags= book.genre.split(",")
@@ -119,10 +126,11 @@ const displayClassement = function(data) {
 }
 
 const fetchClassement= async function(type,tag) {
-    
     const data = await fetchThenjson(`${url}/books/${type}-100/${tag}`);
-    hide();
+    data.type=type;
+    data.tag=tag;
     displayClassement(data);
+    window.history.pushState({location: "classement", data}, `${type}-100 ${tag}`, `/classement/${type}-${tag}`);
 }
 
 
@@ -144,8 +152,9 @@ linkTop.forEach(link=> link.addEventListener("click", linkController) );
 
 
 const displayRecherche= function(data) {
+    hide();
     recherche.style.display="block";
-    if (data.lenth===0) {
+    if (data.length>0) {
         document.querySelector('#titre-recherche').innerText=`x livres correspondent à cette recherche`
         
         rechercheContainer.innerHTML="";
@@ -183,7 +192,30 @@ searchForm.addEventListener("submit",async (event)=> {
     if(radioButtons[2].checked) link+=`&tags=`;
     link+=searchField.value;
     const data = await fetchThenjson(link);
-
-    hide();
+    console.log(data);
     displayRecherche(data);
+    window.history.pushState({location: "recherche", data}, `Recherche`, `/recherche`);
+
 })
+
+
+
+/*
+    Partie dédiée au routing
+*/
+
+window.onpopstate= function (event) {
+    if (event.state) {
+        switch (event.state.location) {
+            case 'acceuil' : 
+                displayAccueil(event.state.data);
+                break;
+            case 'classement' : 
+                displayClassement(event.state.data);
+                break;    
+            case 'recherche' : 
+                displayRecherche(event.state.data);
+                break;
+            }
+    }
+}
