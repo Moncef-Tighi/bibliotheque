@@ -12,8 +12,10 @@ const searchForm=document.querySelector(".search")
 const searchField=document.querySelector(".search__field");
 const radioButtons = document.querySelectorAll(".target");
 const paginationBar = document.querySelector(".paginationBar");
-const next = document.querySelector("#next")
-const previous= document.querySelector("#previous")
+const next = document.querySelector("#next");
+const previous= document.querySelector("#previous");
+
+
 /*
     Les images des étoiles sont en SVG, c'est plus simple de les passer via JS
     Même si du coup ça fait un code bizarre
@@ -148,7 +150,7 @@ linkTop.forEach(link=> link.addEventListener("click", linkController) );
 */
 
 const displayPagination = function(length, start) {
-
+    paginationBar.innerHTML= ` <li class='pagination'><a href="#" id="previous">«</a></li>`
     const size = Math.ceil(length/20)
     if (start+5>size) start-= 3-(size-start)
     console.log(start);
@@ -184,7 +186,18 @@ const displayPagination = function(length, start) {
     paginationBar.insertAdjacentHTML("beforeend", `
     <li class='pagination'><a href="#" id="next">»</a></li>
     `)
-
+    let pages = [...document.querySelectorAll(".pagination")].map(page=> page.firstChild)
+    pages.forEach(page => {
+        page.addEventListener("click", async(event)=> {
+            event.preventDefault();
+            let currentPage=Number(event.target.innerText);
+            
+            let link=window.location.pathname.replace(/page=.+?(?=&)/, `page=${currentPage}`);
+            link= link.slice(11)
+            console.log(currentPage, link)
+            search(currentPage,link);
+        } )
+    })
 
 }
 
@@ -211,30 +224,28 @@ const displayRecherche= function(data, page) {
             `
             
             rechercheContainer.insertAdjacentHTML("beforeend", html);
-            if (page>1) displayPagination(data.length, page);
-        })       
-        
+        })        
+        if (page>=1) displayPagination(data.length, page);
     } else {
         document.querySelector('#titre-recherche').innerText=`Aucune livre ne corresponds à cette recherche...`
     }
 }
 
-
-const search = async function(page) {
-    let link=`books?page=${page}`;
-    if(radioButtons[0].checked) link+=`&title=`;
-    if(radioButtons[1].checked) link+=`&author=`;
-    if(radioButtons[2].checked) link+=`&tags=`;
-    link+=searchField.value;
-    const data = await fetchThenjson(`${url}/${link}`);
+const search = async function(page, link) {
+    const data = await fetchThenjson(`${url}/books?${link}`);
     displayRecherche(data, page);
     window.history.pushState({location: "recherche", data}, `Recherche`, `/recherche/${link}`);
-}
+};
 
 
 searchForm.addEventListener("submit", (event)=> {
     event.preventDefault();
-    search(747);
+    let link=`page=1`;
+    if(radioButtons[0].checked) link+=`&title=`;
+    if(radioButtons[1].checked) link+=`&author=`;
+    if(radioButtons[2].checked) link+=`&tags=`;
+    link+=searchField.value;
+    search(1, link);
 })
 
 
