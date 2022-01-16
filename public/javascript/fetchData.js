@@ -149,9 +149,21 @@ linkTop.forEach(link=> link.addEventListener("click", linkController) );
 
 const displayPagination = function(length, start) {
 
-    let i=start;
     const size = Math.ceil(length/20)
-    while (size>= i && i<6) {
+    if (start+5>size) start-= 3-(size-start)
+    console.log(start);
+
+    let i=start;
+    if (i>3) {
+        paginationBar.insertAdjacentHTML("beforeend", `
+        <li class='pagination'><a href="#" >1</a></li>
+        `)
+        paginationBar.insertAdjacentHTML("beforeend", `
+        <li class="pagination"><a id='more' href="#" >...</a></li>
+    `)
+
+    }
+    while (size>= i && i<start+5) {
         
         paginationBar.insertAdjacentHTML("beforeend", `
             <li class='pagination'><a href="#" >${i}</a></li>
@@ -159,7 +171,7 @@ const displayPagination = function(length, start) {
         i+=1;
     } 
 
-    if (i===6) {
+    if (i===start+5) {
         paginationBar.insertAdjacentHTML("beforeend", `
             <li class="pagination"><a id='more' href="#" >...</a></li>
         `)
@@ -168,6 +180,7 @@ const displayPagination = function(length, start) {
         `)
 
     }
+
     paginationBar.insertAdjacentHTML("beforeend", `
     <li class='pagination'><a href="#" id="next">»</a></li>
     `)
@@ -175,7 +188,7 @@ const displayPagination = function(length, start) {
 
 }
 
-const displayRecherche= function(data) {
+const displayRecherche= function(data, page) {
     hide();
     recherche.style.display="block";
     rechercheContainer.innerHTML="";
@@ -198,8 +211,9 @@ const displayRecherche= function(data) {
             `
             
             rechercheContainer.insertAdjacentHTML("beforeend", html);
+            if (page>1) displayPagination(data.length, page);
         })       
-        displayPagination(data.length);
+        
     } else {
         document.querySelector('#titre-recherche').innerText=`Aucune livre ne corresponds à cette recherche...`
     }
@@ -213,14 +227,14 @@ const search = async function(page) {
     if(radioButtons[2].checked) link+=`&tags=`;
     link+=searchField.value;
     const data = await fetchThenjson(`${url}/${link}`);
-    displayRecherche(data);
+    displayRecherche(data, page);
     window.history.pushState({location: "recherche", data}, `Recherche`, `/recherche/${link}`);
 }
 
 
 searchForm.addEventListener("submit", (event)=> {
     event.preventDefault();
-    search(0);
+    search(747);
 })
 
 
