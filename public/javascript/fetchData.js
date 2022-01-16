@@ -12,8 +12,6 @@ const searchForm=document.querySelector(".search")
 const searchField=document.querySelector(".search__field");
 const radioButtons = document.querySelectorAll(".target");
 const paginationBar = document.querySelector(".paginationBar");
-const next = document.querySelector("#next");
-const previous= document.querySelector("#previous");
 
 
 /*
@@ -149,64 +147,15 @@ linkTop.forEach(link=> link.addEventListener("click", linkController) );
     Partie dédiée au résultat d'une recherche de livre
 */
 
-const displayPagination = function(length, start) {
-    paginationBar.innerHTML= ` <li class='pagination'><a href="#" id="previous">«</a></li>`
-    const size = Math.ceil(length/20)
-    if (start+5>size) start-= 3-(size-start)
-    console.log(start);
-
-    let i=start;
-    if (i>3) {
-        paginationBar.insertAdjacentHTML("beforeend", `
-        <li class='pagination'><a href="#" >1</a></li>
-        `)
-        paginationBar.insertAdjacentHTML("beforeend", `
-        <li class="pagination"><a id='more' href="#" >...</a></li>
-    `)
-
-    }
-    while (size>= i && i<start+5) {
-        
-        paginationBar.insertAdjacentHTML("beforeend", `
-            <li class='pagination'><a href="#" >${i}</a></li>
-        `)
-        i+=1;
-    } 
-
-    if (i===start+5) {
-        paginationBar.insertAdjacentHTML("beforeend", `
-            <li class="pagination"><a id='more' href="#" >...</a></li>
-        `)
-        paginationBar.insertAdjacentHTML("beforeend", `
-            <li class='pagination'><a href="#" >${size}</a></li>
-        `)
-
-    }
-
-    paginationBar.insertAdjacentHTML("beforeend", `
-    <li class='pagination'><a href="#" id="next">»</a></li>
-    `)
-    let pages = [...document.querySelectorAll(".pagination")].map(page=> page.firstChild)
-    pages.forEach(page => {
-        page.addEventListener("click", async(event)=> {
-            event.preventDefault();
-            let currentPage=Number(event.target.innerText);
-            
-            let link=window.location.pathname.replace(/page=.+?(?=&)/, `page=${currentPage}`);
-            link= link.slice(11)
-            console.log(currentPage, link)
-            search(currentPage,link);
-        } )
-    })
-
-}
-
 const displayRecherche= function(data, page) {
     hide();
     recherche.style.display="block";
     rechercheContainer.innerHTML="";
+    document.documentElement.scrollTop = 0;
     if (data.length>0) {
-        document.querySelector('#titre-recherche').innerText=`${data.length} livres correspondent à cette recherche`
+        document.querySelector('#titre-recherche').innerText=`${data.length} livres correspondent à cette recherche`;
+        document.querySelector('#page-actuelle').innerHTML=`page <span id="current">${page}</span>/${Math.ceil(data.length/20)}`;
+
         data.books.forEach( (book)=>{
             const tags= book.genre.split(",");
             let html=`
@@ -225,7 +174,11 @@ const displayRecherche= function(data, page) {
             
             rechercheContainer.insertAdjacentHTML("beforeend", html);
         })        
-        if (page>=1) displayPagination(data.length, page);
+        if (page>1) {
+            document.querySelector(".paginationBar").style.display="flex";
+            displayPagination(data.length, page);
+        }
+
     } else {
         document.querySelector('#titre-recherche').innerText=`Aucune livre ne corresponds à cette recherche...`
     }
@@ -245,6 +198,7 @@ searchForm.addEventListener("submit", (event)=> {
     if(radioButtons[1].checked) link+=`&author=`;
     if(radioButtons[2].checked) link+=`&tags=`;
     link+=searchField.value;
+    searchField.value="";
     search(1, link);
 })
 

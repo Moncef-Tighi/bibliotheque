@@ -7,6 +7,7 @@
 
         <link rel="shortcut icon" type="image/jpg" href="./img/favicon.png"/>
         <script defer src="./javascript/counterAnimation.js"></script>
+        <script src="./javascript/pagination.js"></script>
         <script defer src="./javascript/fetchData.js"></script>
         <title>Bibliothèque</title>
         
@@ -16,7 +17,7 @@
         <div class="container">
             <header class="header">
                 <div>
-                    <img src="./img/main.png" alt="Logo" class="header__logo" />
+                    <a href="/"><img src="./img/main.png" alt="Logo" class="header__logo" /></a>
                     <form class="search">
                     <input
                         type="text"
@@ -143,12 +144,13 @@
                         <use href="./img/icons.svg#previous-icon"></use>
                     </svg>
                     <h1 id="titre-recherche"></h1>
+                    <h2 id="page-actuelle"></h1>
                 </div>
 
                 <section id="rechercheContainer">
 
                 </section>
-                <ul class="paginationBar">
+                <ul class="paginationBar" style="display:none;">
                 </ul>
             </div>
 

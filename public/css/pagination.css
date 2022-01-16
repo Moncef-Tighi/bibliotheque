@@ -1,5 +1,5 @@
   
-.pagination a {
+.pagination a, #next a, #previous a{
     text-decoration: none;
     padding: 15px;
     background: white;
