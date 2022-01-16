@@ -15,3 +15,15 @@
 .recherche_illustration{
     width: 100%;
 }
+
+#page-actuelle {
+    position: absolute;
+    font-size: 40px;
+    text-decoration: underline;
+    left: 50%;
+    transform: translate(-50%, +115%);
+}
+
+#page-actuelle span {
+    color: var(--green);
+}

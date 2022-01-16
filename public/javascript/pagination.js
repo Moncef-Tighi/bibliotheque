@@ -26,8 +26,8 @@ const displayPagination = function(length, start) {
         paginationBar.insertAdjacentHTML("beforeend", `
         <li id='more'><a href="#" >...</a></li>
     `)
-
     }
+    if (i<1) i=1
     while (size>= i && i<start+5) {
         
         paginationBar.insertAdjacentHTML("beforeend", `

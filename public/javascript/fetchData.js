@@ -174,7 +174,7 @@ const displayRecherche= function(data, page) {
             
             rechercheContainer.insertAdjacentHTML("beforeend", html);
         })        
-        if (page>1) {
+        if (data.length>20) {
             document.querySelector(".paginationBar").style.display="flex";
             displayPagination(data.length, page);
         }
