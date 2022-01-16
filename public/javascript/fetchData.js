@@ -1,6 +1,5 @@
 const url = "http://127.0.0.1:3000/api/v1";
 
-
 const accueilContainer= document.querySelector("#featured_books")
 const linkBest = document.querySelectorAll(".best");
 const linkTop = document.querySelectorAll(".top");
@@ -54,8 +53,7 @@ const previousIcon= document.querySelectorAll(".previous");
 previousIcon.forEach(icon=> {
     icon.addEventListener("click", (event) => {
         event.preventDefault();
-        hide();
-        accueil.style.display="block";
+        history.back()
     })
 });
 
@@ -67,6 +65,7 @@ previousIcon.forEach(icon=> {
 const displayAccueil =  function(data) {
     hide();
     accueil.style.display="block";
+    accueilContainer.innerHTML="";
     data.books.forEach(book=>{
         let html=`
         <div>
@@ -86,10 +85,6 @@ const fetchAccueil= async function(){
     displayAccueil(data);
     window.history.pushState({location: "acceuil", data}, "accueil", "/");
 }
-
-window.history.replaceState({}, null, "");
-fetchAccueil();
-
 
 
 /*
@@ -154,11 +149,10 @@ linkTop.forEach(link=> link.addEventListener("click", linkController) );
 const displayRecherche= function(data) {
     hide();
     recherche.style.display="block";
+    rechercheContainer.innerHTML="";
     if (data.length>0) {
         document.querySelector('#titre-recherche').innerText=`x livres correspondent à cette recherche`
-        
-        rechercheContainer.innerHTML="";
-        data.books.forEach( (book, i)=>{
+        data.books.forEach( (book)=>{
             const tags= book.genre.split(",");
             let html=`
             <div>
@@ -186,15 +180,14 @@ const displayRecherche= function(data) {
 searchForm.addEventListener("submit",async (event)=> {
     event.preventDefault();
 
-    let link=`${url}/books?page=1&limit=20`;
+    let link=`books?page=1`;
     if(radioButtons[0].checked) link+=`&title=`;
     if(radioButtons[1].checked) link+=`&author=`;
     if(radioButtons[2].checked) link+=`&tags=`;
     link+=searchField.value;
-    const data = await fetchThenjson(link);
-    console.log(data);
+    const data = await fetchThenjson(`${url}/${link}`);
     displayRecherche(data);
-    window.history.pushState({location: "recherche", data}, `Recherche`, `/recherche`);
+    window.history.pushState({location: "recherche", data}, `Recherche`, `/recherche/${link}`);
 
 })
 
@@ -203,6 +196,7 @@ searchForm.addEventListener("submit",async (event)=> {
 /*
     Partie dédiée au routing
 */
+
 
 window.onpopstate= function (event) {
     if (event.state) {
@@ -219,3 +213,10 @@ window.onpopstate= function (event) {
             }
     }
 }
+
+
+
+
+// Initialization : 
+
+fetchAccueil();

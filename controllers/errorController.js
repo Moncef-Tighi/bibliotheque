@@ -21,6 +21,13 @@ const handleValidationErrorDB = function(error){
 };
 
 const sendErrorDev = function(error, request, response){
+    console.log("aaaaaaaaaaaaa")
+    console.log(!request.originalUrl.includes("/api"));
+    if (!request.originalUrl.includes("/api")) {
+        res.sendFile(path.join(__dirname + '/public/index.html'));
+        return;
+    }
+
     return response.status(error.statusCode).json({
                 status : error.status,
                 error : error,
@@ -32,11 +39,10 @@ const sendErrorDev = function(error, request, response){
 
 
 const defaultError = function(error, request, response, next) {
-
     error.statusCode= error.statusCode || 500;
     error.status = error.status || "error";
 
-        sendErrorDev(error, request, response);    
+    sendErrorDev(error, request, response);    
     next();
 }
 
