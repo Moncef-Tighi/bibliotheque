@@ -147,11 +147,11 @@ linkTop.forEach(link=> link.addEventListener("click", linkController) );
     Partie dédiée au résultat d'une recherche de livre
 */
 
-const displayPagination = function(length) {
+const displayPagination = function(length, start) {
 
-    let i=1;
+    let i=start;
     const size = Math.ceil(length/20)
-    while (size>= i && i<5) {
+    while (size>= i && i<6) {
         
         paginationBar.insertAdjacentHTML("beforeend", `
             <li class='pagination'><a href="#" >${i}</a></li>
@@ -159,16 +159,17 @@ const displayPagination = function(length) {
         i+=1;
     } 
 
-    if (i===5) {
+    if (i===6) {
         paginationBar.insertAdjacentHTML("beforeend", `
-            <li><a id='more' href="#" >...</a></li>
+            <li class="pagination"><a id='more' href="#" >...</a></li>
         `)
         paginationBar.insertAdjacentHTML("beforeend", `
-            <li class='pagination><a href="#" >${size}</a></li>
+            <li class='pagination'><a href="#" >${size}</a></li>
         `)
+
     }
-    paginationBar.insertAdjacentHTML("afterbegin", `
-    <li><a class='pagination' href="#" id="next">»</a></li>
+    paginationBar.insertAdjacentHTML("beforeend", `
+    <li class='pagination'><a href="#" id="next">»</a></li>
     `)
 
 
