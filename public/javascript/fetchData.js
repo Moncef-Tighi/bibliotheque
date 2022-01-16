@@ -11,7 +11,9 @@ const recherche= document.querySelector("#recherche");
 const searchForm=document.querySelector(".search")
 const searchField=document.querySelector(".search__field");
 const radioButtons = document.querySelectorAll(".target");
-
+const paginationBar = document.querySelector(".paginationBar");
+const next = document.querySelector("#next")
+const previous= document.querySelector("#previous")
 /*
     Les images des étoiles sont en SVG, c'est plus simple de les passer via JS
     Même si du coup ça fait un code bizarre
@@ -145,13 +147,39 @@ linkTop.forEach(link=> link.addEventListener("click", linkController) );
     Partie dédiée au résultat d'une recherche de livre
 */
 
+const displayPagination = function(length) {
+
+    let i=1;
+    const size = Math.ceil(length/20)
+    while (size>= i && i<5) {
+        
+        paginationBar.insertAdjacentHTML("beforeend", `
+            <li class='pagination'><a href="#" >${i}</a></li>
+        `)
+        i+=1;
+    } 
+
+    if (i===5) {
+        paginationBar.insertAdjacentHTML("beforeend", `
+            <li><a id='more' href="#" >...</a></li>
+        `)
+        paginationBar.insertAdjacentHTML("beforeend", `
+            <li class='pagination><a href="#" >${size}</a></li>
+        `)
+    }
+    paginationBar.insertAdjacentHTML("afterbegin", `
+    <li><a class='pagination' href="#" id="next">»</a></li>
+    `)
+
+
+}
 
 const displayRecherche= function(data) {
     hide();
     recherche.style.display="block";
     rechercheContainer.innerHTML="";
     if (data.length>0) {
-        document.querySelector('#titre-recherche').innerText=`x livres correspondent à cette recherche`
+        document.querySelector('#titre-recherche').innerText=`${data.length} livres correspondent à cette recherche`
         data.books.forEach( (book)=>{
             const tags= book.genre.split(",");
             let html=`
@@ -170,17 +198,15 @@ const displayRecherche= function(data) {
             
             rechercheContainer.insertAdjacentHTML("beforeend", html);
         })       
+        displayPagination(data.length);
     } else {
         document.querySelector('#titre-recherche').innerText=`Aucune livre ne corresponds à cette recherche...`
     }
 }
 
 
-
-searchForm.addEventListener("submit",async (event)=> {
-    event.preventDefault();
-
-    let link=`books?page=1`;
+const search = async function(page) {
+    let link=`books?page=${page}`;
     if(radioButtons[0].checked) link+=`&title=`;
     if(radioButtons[1].checked) link+=`&author=`;
     if(radioButtons[2].checked) link+=`&tags=`;
@@ -188,7 +214,12 @@ searchForm.addEventListener("submit",async (event)=> {
     const data = await fetchThenjson(`${url}/${link}`);
     displayRecherche(data);
     window.history.pushState({location: "recherche", data}, `Recherche`, `/recherche/${link}`);
+}
 
+
+searchForm.addEventListener("submit", (event)=> {
+    event.preventDefault();
+    search(0);
 })
 
 

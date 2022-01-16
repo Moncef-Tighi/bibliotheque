@@ -53,8 +53,19 @@ const getAll =  catchAsync(async function(request,response) {
         .minNumberOfRatings()
         .minRating();
 
-
     const books = await filtre.query;
+    //On a beseoin de se filtre pour savoir combient de résultat il y a au total si il n'y avait aucune pagination
+    //ça permetra ensuite de créer un système de pagination côté front-end
+
+    delete filtre.queryString.page;
+    delete filtre.queryString.limit;
+
+    if (filtre.queryString.tags) {
+        filtre.queryString.genre=filtre.queryString.tags;
+        delete filtre.queryString.genre
+    }
+
+    const numberOfResults= await Book.countDocuments(filtre.queryString);
     if (!books) {
         return response.status(404).json({
             status: "error",
@@ -64,7 +75,7 @@ const getAll =  catchAsync(async function(request,response) {
 
     response.status(200).json({
         status: "ok",
-        length : books.length,
+        length : numberOfResults,
         books
     })
 
