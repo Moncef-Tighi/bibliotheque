@@ -237,24 +237,24 @@ const displayOneBook = function(data) {
         <h1>${googleData.title}</h1>
         <h2>Par ${googleData.authors[0]}</h2>
         <span>${getStars(book.rating)}${book.rating} (${book.totalratings})</span>
+        <div id="additional-info"> 
+            <ul>
+                <li>Date de publication :  ${googleData.publishedDate}</li>
+                <li>Publié part : ${googleData.publisher}</li>
+                <li>Taille : ${googleData.pageCount} pages</li>
+            </ul>
+        </div>
         <div id="head-info-links">
             <a href="${googleData.canonicalVolumeLink}">Plus d'informations</a>
         </div>
         <ul>
             ${tags.slice(tags.indexOf("<"), -1)}
         </ul></ul>
+        
     </div>
     <div id="description">
         <p>${googleData.description}</p>
         <p>${book.desc}</p>
-    </div>
-
-    <div id="additional-info"> 
-        <ul>
-            <li>Date de publication : ${googleData.publishedDate}</li>
-            <li>Publié par : ${googleData.publisher}</li>
-            <li>Nombre de pages : ${googleData.pageCount}</li>
-        </ul>
     </div>
     `;
     oneBook.insertAdjacentHTML("afterbegin", html);

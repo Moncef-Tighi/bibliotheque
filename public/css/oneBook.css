@@ -51,11 +51,10 @@
 
 #additional-info ul {
     list-style: none;
-    width: 100%;
     display: flex;
     flex-direction: column;
     font-size: 2rem;
     margin: 0;
-    padding: 1vw;
+    width: fit-content;
 
 }
