@@ -4,7 +4,7 @@ const ChangeOnePage = function(event) {
     if (event.target.id==="previous") currentPage-=1 
     else currentPage+=1 
     let link=window.location.pathname.replace(/page=.+?(?=&)/, `page=${Number(currentPage)}`);
-    console.log(link);
+
     link= link.slice(11)
 
     search(currentPage,link);

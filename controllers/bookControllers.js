@@ -2,13 +2,14 @@ const Book = require("../models/bookModel");
 const AppError = require("../utilities/AppErrors");
 const {catchAsync}=require("./errorController");
 const APIFeatures = require("../utilities/APIFeatures")
-const slugify= require("slugify");
-const { find } = require("../models/bookModel");
 
 
 
 const getOne = catchAsync(async function(request,response) {
-    const requestedBook= await Book.findOne({isbn : request.params.isbn});
+    let querry;
+    if (Number(request.params.isbn)>1) querry= {isbn : request.params.isbn}
+    else querry= {slug : request.params.isbn}
+    const requestedBook= await Book.findOne(querry);
     if (!requestedBook) {
         return response.status(404).json({
             status: "error",

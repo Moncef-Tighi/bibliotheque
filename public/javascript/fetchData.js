@@ -1,6 +1,7 @@
 const url = "http://127.0.0.1:3000/api/v1";
 
-const accueilContainer= document.querySelector("#featured_books")
+const accueilContainer= document.querySelector("#featured_books");
+const oneBook= document.querySelectorAll("#one-book");
 const linkBest = document.querySelectorAll(".best");
 const linkTop = document.querySelectorAll(".top");
 const accueil = document.querySelector("#accueil");
@@ -35,7 +36,8 @@ const hide = function(){
     classement.style.display="none";
     accueil.style.display="none";
     recherche.style.display="none";
-
+    oneBook.style.display="none";
+    oneBook.innerHTML="";
 }
 
 const getStars = function(rating){
@@ -71,7 +73,7 @@ const displayAccueil =  function(data) {
     data.books.forEach(book=>{
         let html=`
         <div>
-            <h2>${book.title}</h2>
+            <h2><a href="#" data-isbn="${book.isbn}" data-slug="${book.slug}" class="oneBook">${book.title}</a></h2>
             <img src="${book.img}" class="acceuil_illustration">
             <h3>${book.author.split(",")[0]}</h3>
             <span>${getStars(book.rating)}${book.rating} (${book.totalratings})</span>
@@ -79,11 +81,15 @@ const displayAccueil =  function(data) {
         `
         accueilContainer.insertAdjacentHTML("beforeend", html)
     })
+    //Obligé d'attacher l'event listener ici, sinon il s'éxecutera avant que les links ne soit render sur la page.
+    const linkBooks=document.querySelectorAll(".OneBook");
+    linkBooks.forEach(book=> book.addEventListener("click", fetchOneBook));
+
 } 
 
 
 const fetchAccueil= async function(){
-    const data = await fetchThenjson(`${url}/books?page=1&limit=21&fields=author,title,img,isbn,rating,totalratings`);
+    const data = await fetchThenjson(`${url}/books?page=1&limit=21&fields=author,title,img,isbn,rating,totalratings, slug`);
     displayAccueil(data);
     window.history.pushState({location: "acceuil", data}, "accueil", "/");
 }
@@ -205,24 +211,32 @@ searchForm.addEventListener("submit", (event)=> {
 
 
 /*
-    Partie dédiée au routing
+    Partie dédiée à l'affichage d'un seul livre
 */
 
+const displayOneBook = function(data) {
+    //hide();
+    console.log(data);
+}
 
-window.onpopstate= function (event) {
-    if (event.state) {
-        switch (event.state.location) {
-            case 'acceuil' : 
-                displayAccueil(event.state.data);
-                break;
-            case 'classement' : 
-                displayClassement(event.state.data);
-                break;    
-            case 'recherche' : 
-                displayRecherche(event.state.data);
-                break;
-            }
+const fetchOneBook= async function(event) {
+    event.preventDefault();
+    const isbn=event.target.dataset.isbn
+    const slug=event.target.dataset.slug
+
+    const title=event.target.innerText
+    let data;
+    if (isbn) {
+        data= await fetchThenjson(`${url}/books/${isbn}`);
+    } else {
+        data=await fetchThenjson(`${url}/books/${slug}`);
     }
+    const googleData = await fetchThenjson(
+        `https://www.googleapis.com/books/v1/volumes?q=${title}&maxResults=1&langRestrict="fr"`);
+
+    data= {...data, ...{googleData : googleData.items[0].volumeInfo} }
+    displayOneBook(data)
+    window.history.pushState({location: "book", data}, `${data.title}`, `/book/${data.slug}`);
 }
 
 
