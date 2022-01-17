@@ -1,0 +1,28 @@
+#one-book {
+    margin: 3vw;
+    padding: 1vw;
+}
+
+#one-book img {
+    width: 25vw;
+    float: left;
+    padding: 2vw;
+}
+
+#head-info {
+
+}
+
+#description {
+    font-size: 1.5rem;
+}
+
+#one-book ul {
+    height: fit-content;
+    width: 80px;
+    display: flex;
+}
+
+#additional-info ul {
+    list-style: none;
+}

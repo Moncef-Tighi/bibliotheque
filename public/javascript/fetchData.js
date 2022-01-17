@@ -1,7 +1,7 @@
 const url = "http://127.0.0.1:3000/api/v1";
 
 const accueilContainer= document.querySelector("#featured_books");
-const oneBook= document.querySelectorAll("#one-book");
+const oneBook= document.querySelector("#one-book");
 const linkBest = document.querySelectorAll(".best");
 const linkTop = document.querySelectorAll(".top");
 const accueil = document.querySelector("#accueil");
@@ -215,8 +215,45 @@ searchForm.addEventListener("submit", (event)=> {
 */
 
 const displayOneBook = function(data) {
-    //hide();
-    console.log(data);
+    hide();
+    oneBook.style.display="block";
+    googleData= data.googleData;
+    book=data.requestedBook
+    //C'est bizarre de devoir reduce les tags comme ça, mais c'est parce que les data ne sont pas clean
+    //Et à cause d'une implémentation étrange de la méthode reduce on doit ajouter le premier élément
+    //à la fin sinon il passera dans l'output sans passer par l'accumulateur
+    const accumulator = (total, tag) => {
+        return total+=`<li class="tags ${tag}">${tag}</li>`
+    }
+    const array = book.genre.split(",").slice(0,4);
+    const tags= array.reduce(accumulator, array[0]);
+
+    let html = `
+    <img src="${book.img}"></img>
+    <div id="head-info">
+        <h1>${googleData.title}</h1>
+        <h2>Par ${googleData.authors[0]}</h2>
+        <span>${getStars(book.rating)}${book.rating} (${book.totalratings})</span>
+        <a href="${googleData.canonicalVolumeLink}">Plus d'informations</a>
+        <a href="${googleData.previewLink}">Preview du livre</a>
+        <ul>
+            ${tags.slice(tags.indexOf("<"), -1)}
+        </ul></ul>
+    </div>
+    <div id="description">
+        <p>${googleData.description}</p>
+        <p>${book.desc}</p>
+    </div>
+
+    <div id="additional-info"> 
+        <ul>
+            <li>Date de publication : ${googleData.publishedDate}</li>
+            <li>Publié par : ${googleData.publisher}</li>
+            <li>Nombre de pages : ${googleData.pageCount}</li>
+        </ul>
+    </div>
+    `;
+    oneBook.insertAdjacentHTML("afterbegin", html);
 }
 
 const fetchOneBook= async function(event) {
