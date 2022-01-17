@@ -229,13 +229,17 @@ const displayOneBook = function(data) {
     const tags= array.reduce(accumulator, array[0]);
 
     let html = `
+    <svg class="advanced__icon previous">
+        <use href="./img/icons.svg#previous-icon"></use>
+    </svg>
     <img src="${book.img}"></img>
     <div id="head-info">
         <h1>${googleData.title}</h1>
         <h2>Par ${googleData.authors[0]}</h2>
         <span>${getStars(book.rating)}${book.rating} (${book.totalratings})</span>
-        <a href="${googleData.canonicalVolumeLink}">Plus d'informations</a>
-        <a href="${googleData.previewLink}">Preview du livre</a>
+        <div id="head-info-links">
+            <a href="${googleData.canonicalVolumeLink}">Plus d'informations</a>
+        </div>
         <ul>
             ${tags.slice(tags.indexOf("<"), -1)}
         </ul></ul>
