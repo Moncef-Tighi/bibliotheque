@@ -32,7 +32,7 @@ const displayClassement = function(data) {
             <div>
                 <h1 class='number'>#${i+1}</h1>
                 <img src="${book.img}" class="classement_illustration">
-                <h2>${book.title}</h2>
+                <h2><a href="#" data-isbn="${book.isbn}" data-slug="${book.slug}" class="oneBook">${book.title}</a></h2>
                 <h3>By - ${book.author.split(",")[0]}</h3>
                 <span>${getStars(book.rating)}${book.rating} (${book.totalratings})</span>
                 <ul class="tagList">
@@ -46,6 +46,8 @@ const displayClassement = function(data) {
             classementContainer.insertAdjacentHTML("beforeend", html);
         })       
     }
+    const linkBooks=document.querySelectorAll(".OneBook");
+    linkBooks.forEach(book=> book.addEventListener("click", fetchOneBook));
 
 }
 
@@ -58,13 +60,12 @@ const displayRecherche= function(data, page) {
     if (data.length>0) {
         document.querySelector('#titre-recherche').innerText=`${data.length} livres correspondent à cette recherche`;
         document.querySelector('#page-actuelle').innerHTML=`page <span id="current">${page}</span>/${Math.ceil(data.length/20)}`;
-
         data.books.forEach( (book)=>{
             const tags= book.genre.split(",");
             let html=`
             <div>
                 <img src="${book.img}" class="recherche_illustration">
-                <h2>${book.title}</h2>
+                <h2><a href="#" data-isbn="${book.isbn}" data-slug="${book.slug}" class="oneBook">${book.title}</a></h2>
                 <h3>By - ${book.author.split(",")[0]}</h3>
                 <span>${getStars(book.rating)}${book.rating} (${book.totalratings})</span>
                 <ul class="tagList">
@@ -81,7 +82,8 @@ const displayRecherche= function(data, page) {
             document.querySelector(".paginationBar").style.display="flex";
             displayPagination(data.length, page);
         }
-
+        const linkBooks=document.querySelectorAll(".OneBook");
+        linkBooks.forEach(book=> book.addEventListener("click", fetchOneBook));    
     } else {
         document.querySelector('#titre-recherche').innerText=`Aucune livre ne corresponds à cette recherche...`
     }

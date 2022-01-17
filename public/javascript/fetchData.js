@@ -62,6 +62,7 @@ linkTop.forEach(link=> link.addEventListener("click", linkController) );
 
 const search = async function(page, link) {
     const data = await fetchThenjson(`${url}/books?${link}`);
+    console.log(data);
     displayRecherche(data, page);
     window.history.pushState({location: "recherche", data}, `Recherche`, `/recherche/${link}`);
 };
@@ -101,8 +102,9 @@ const fetchOneBook= async function(event) {
         `https://www.googleapis.com/books/v1/volumes?q=${title}&maxResults=1&langRestrict="fr"`);
 
     data= {...data, ...{googleData : googleData.items[0].volumeInfo} }
-    displayOneBook(data)
-    window.history.pushState({location: "book", data}, `${data.title}`, `/book/${data.slug}`);
+    displayOneBook(data);
+    console.log(data);
+    window.history.pushState({location: "book", data}, `${data.requestedBook.title}`, `/book/${data.requestedBook.slug}`);
 }
 
 
