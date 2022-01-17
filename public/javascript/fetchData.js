@@ -1,3 +1,4 @@
+//const url = "http://127.0.0.1:3000/api/v1";
 const url = "https://bibliotheque-api.herokuapp.com/api/v1";
 
 const accueilContainer= document.querySelector("#featured_books");
@@ -103,7 +104,7 @@ const fetchOneBook= async function(event) {
 
     data= {...data, ...{googleData : googleData.items[0].volumeInfo} }
     displayOneBook(data);
-    console.log(data);
+
     window.history.pushState({location: "book", data}, `${data.requestedBook.title}`, `/book/${data.requestedBook.slug}`);
 }
 

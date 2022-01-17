@@ -247,12 +247,12 @@ h1 {
 
 #featured_books div h2 {
     color: var(--green);
-    text-align: justify;
+    text-align: center;
     margin: 0;
     padding-bottom: 2vw;
 }
 #featured_books div h3 {
-    text-align: justify;
+    text-align: center;
     margin: 0;
     padding-bottom: 0.5vw;
 }
