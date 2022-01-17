@@ -68,11 +68,12 @@ class APIFeatures {
         if (tags) filter.genre={"$regex" : tags, "$options": "i"}
         //Ce n'est pas idéal comme syntax mais je crois pas que c'est possible de chain les finds
         this.query= this.query.find(filter);
-        this.queryString=filter;
+        //this.queryString={...filter, ...this.queryString};
 
         return this;
     }
     minNumberOfRatings(){
+        console.log(this.queryString);
         const minNumberOfRatings = this.queryString.minNumberOfRatings;
         if (minNumberOfRatings) {
             this.query.find({totalratings : {$gte : minNumberOfRatings}});
@@ -84,6 +85,7 @@ class APIFeatures {
         if (minRating){
             this.query.find({rating : {$gte : minRating}});
         }
+        console.log(minRating);
         return this
     }
 }

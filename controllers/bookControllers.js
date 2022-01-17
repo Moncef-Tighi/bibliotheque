@@ -95,9 +95,8 @@ const bestTag = catchAsync(async function(request, response, next){
     request.query.limit='100';
     request.query.page='1';
     request.query.minNumberOfRatings="10000";
-    request.query.sort="-rating";
+    request.query.sort="+rating";
 
-    request.query.total
     next();
 })
 module.exports={
