@@ -68,7 +68,7 @@ class APIFeatures {
         if (tags) filter.genre={"$regex" : tags, "$options": "i"}
         //Ce n'est pas idéal comme syntax mais je crois pas que c'est possible de chain les finds
         this.query= this.query.find(filter);
-        //this.queryString={...filter, ...this.queryString};
+        this.queryString=filter;
 
         return this;
     }

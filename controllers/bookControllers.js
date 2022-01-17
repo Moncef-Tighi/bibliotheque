@@ -50,9 +50,9 @@ const getAll =  catchAsync(async function(request,response) {
         .sort()
         .projection()
         .paginate()
-        .search()
         .minNumberOfRatings()
-        .minRating();
+        .minRating()
+        .search();
 
     const books = await filtre.query;
     //On a beseoin de se filtre pour savoir combient de résultat il y a au total si il n'y avait aucune pagination

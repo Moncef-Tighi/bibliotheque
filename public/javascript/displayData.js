@@ -21,31 +21,30 @@ const displayAccueil =  function(data) {
 
 
 const displayClassement = function(data) {
-    if (data) {
-        hide();
-        classement.style.display="block";
-        document.querySelector('#titre-classement').innerText=`${data.type}-100 catégorie ${data.tag}`
-        classementContainer.innerHTML="";
-        data.books.forEach( (book, i)=>{
-            const tags= book.genre.split(",")
-            let html=`
-            <div>
-                <h1 class='number'>#${i+1}</h1>
-                <img src="${book.img}" class="classement_illustration">
-                <h2><a href="#" data-isbn="${book.isbn}" data-slug="${book.slug}" class="oneBook">${book.title}</a></h2>
-                <h3>By - ${book.author.split(",")[0]}</h3>
-                <span>${getStars(book.rating)}${book.rating} (${book.totalratings})</span>
-                <ul class="tagList">
-                    <li class="tags ${tags[0]}">${tags[0]}</li>
-                    <li class="tags ${tags[1]}">${tags[1]}</li>
-                    <li class="tags ${tags[2]}">${tags[2]}</li>
-                </ul>
-            </div>
-            `
-            
-            classementContainer.insertAdjacentHTML("beforeend", html);
-        })       
-    }
+    hide();
+    classement.style.display="block";
+    document.querySelector('#titre-classement').innerText=`${data.type}-100 catégorie ${data.tag}`
+    classementContainer.innerHTML="";
+    data.books.forEach( (book, i)=>{
+        const tags= book.genre.split(",")
+        let html=`
+        <div>
+            <h1 class='number'>#${i+1}</h1>
+            <img src="${book.img}" class="classement_illustration">
+            <h2><a href="#" data-isbn="${book.isbn}" data-slug="${book.slug}" class="oneBook">${book.title}</a></h2>
+            <h3>By - ${book.author.split(",")[0]}</h3>
+            <span>${getStars(book.rating)}${book.rating} (${book.totalratings})</span>
+            <ul class="tagList">
+                <li class="tags ${tags[0]}">${tags[0]}</li>
+                <li class="tags ${tags[1]}">${tags[1]}</li>
+                <li class="tags ${tags[2]}">${tags[2]}</li>
+            </ul>
+        </div>
+        `
+        
+        classementContainer.insertAdjacentHTML("beforeend", html);
+    })       
+
     const linkBooks=document.querySelectorAll(".OneBook");
     linkBooks.forEach(book=> book.addEventListener("click", fetchOneBook));
 
