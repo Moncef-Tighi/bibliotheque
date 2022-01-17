@@ -73,7 +73,7 @@ class APIFeatures {
         return this;
     }
     minNumberOfRatings(){
-        console.log(this.queryString);
+
         const minNumberOfRatings = this.queryString.minNumberOfRatings;
         if (minNumberOfRatings) {
             this.query.find({totalratings : {$gte : minNumberOfRatings}});
@@ -85,7 +85,7 @@ class APIFeatures {
         if (minRating){
             this.query.find({rating : {$gte : minRating}});
         }
-        console.log(minRating);
+
         return this
     }
 }
