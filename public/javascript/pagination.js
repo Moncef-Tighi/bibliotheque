@@ -12,6 +12,7 @@ const ChangeOnePage = function(event) {
 }
 
 const displayPagination = function(length, start) {
+    paginationBar.innerHTML='';
     if (start!=1) paginationBar.innerHTML= ` <li id="previous"><a href="#" id="previous">«</a></li>`
     const size = Math.ceil(length/20)
     if (start+5>size) start-= 3-(size-start);

@@ -63,7 +63,7 @@ linkTop.forEach(link=> link.addEventListener("click", linkController) );
 
 const search = async function(page, link) {
     const data = await fetchThenjson(`${url}/books?${link}`);
-    console.log(data);
+
     displayRecherche(data, page);
     window.history.pushState({location: "recherche", data}, `Recherche`, `/recherche/${link}`);
 };
