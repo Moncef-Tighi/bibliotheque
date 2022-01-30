@@ -284,3 +284,15 @@ a:active {
         display: none;
     }
 }
+
+@media only screen and (max-width: 600px) {
+
+    #accueil_start ul {
+        line-height: 23px;
+    }
+    .counter {
+        width: fit-content;
+        padding : 0;
+        font-size: 30px;
+    }
+}

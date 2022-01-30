@@ -1,5 +1,5 @@
-//const url = "http://127.0.0.1:3000/api/v1";
-const url = "https://bibliotheque-api.herokuapp.com/api/v1";
+const url = "http://127.0.0.1:3000/api/v1";
+//const url = "https://bibliotheque-api.herokuapp.com/api/v1";
 
 const accueilContainer= document.querySelector("#featured_books");
 const oneBook= document.querySelector("#one-book");
@@ -47,7 +47,7 @@ const fetchClassement= async function(type,tag) {
 
 const linkController = function(event) {
     event.preventDefault();
-    fetchClassement(event.target.classList[0], event.target.dataset.tag)
+    fetchClassement(event.target.closest("a").classList[0], event.target.dataset.tag)
 }
 
 linkBest.forEach(link=> link.addEventListener("click", linkController) );
@@ -89,10 +89,12 @@ searchForm.addEventListener("submit", (event)=> {
 
 const fetchOneBook= async function(event) {
     event.preventDefault();
-    const isbn=event.target.dataset.isbn
-    const slug=event.target.dataset.slug
 
-    const title=event.target.innerText
+    const target=event.target.closest("a");
+    const isbn=target.dataset.isbn
+    const slug=target.dataset.slug
+    const title=target.dataset.title;
+
     let data;
     if (isbn) {
         data= await fetchThenjson(`${url}/books/${isbn}`);
