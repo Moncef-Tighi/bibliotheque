@@ -306,11 +306,20 @@ a:active {
     .container {
         max-width: 100vw;
     }
-    .radio {
+    #radio {
         display: none;
     }
     body {
         background: none;
+    }
+    #accueil_start {
+        flex-direction: column-reverse;
+    }
+    #accueil_start ul {
+        height: fit-content;
+    }
+    #reading-image {
+        width: 100%;
     }
 
 }
