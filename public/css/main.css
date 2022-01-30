@@ -276,7 +276,9 @@ a:active {
 }
 
 @media only screen and (max-width: 850px) {
-
+    .acceuil_illustration {
+        width: fit-content;
+    }
     .container {
         max-width: 91vw;
     }
@@ -306,7 +308,7 @@ a:active {
     .container {
         max-width: 100vw;
     }
-    #radio {
+    .advanced__btn {
         display: none;
     }
     body {
@@ -320,6 +322,9 @@ a:active {
     }
     #reading-image {
         width: 100%;
+    }
+    .header__logo {
+        display: none;
     }
 
 }
