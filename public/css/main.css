@@ -31,7 +31,6 @@ body {
     justify-content: space-between;
     display: flex;
     flex-direction: column;
-    width: 85vw;
     height: fit-content;
 }
 .header div{
@@ -39,7 +38,7 @@ body {
     display: flex;
     align-items: center;
     height: 100%;
-    margin-left: -65px;
+    margin: auto;
 }
 .header__logo {
     height: 9.6rem;
@@ -64,7 +63,7 @@ body {
     display: grid;
     padding-left: 3rem;
     transition: all 0.3s;
-    width: 40vw;
+    width: fit-content;
     place-content: space-between;
     margin-top: 20px;
     margin-right: 2vw;
@@ -273,5 +272,15 @@ a:active {
     }
     .search{
         grid-row-gap: 10px;
+    }
+}
+
+@media only screen and (max-width: 850px) {
+
+    .container {
+        max-width: 91vw!important;
+    }
+    .nav {
+        display: none;
     }
 }
