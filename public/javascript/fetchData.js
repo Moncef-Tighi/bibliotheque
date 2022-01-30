@@ -1,5 +1,5 @@
-const url = "http://127.0.0.1:3000/api/v1";
-//const url = "https://bibliotheque-api.herokuapp.com/api/v1";
+//const url = "http://127.0.0.1:3000/api/v1";
+const url = "https://bibliotheque-api.herokuapp.com/api/v1";
 
 const accueilContainer= document.querySelector("#featured_books");
 const oneBook= document.querySelector("#one-book");

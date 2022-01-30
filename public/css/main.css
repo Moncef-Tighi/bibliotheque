@@ -228,8 +228,9 @@ h1 {
 
 #featured_books{
     display: grid;
-    grid-template-columns: repeat(auto-fill,25.32vw);
+    grid-template-columns: repeat(auto-fill,minmax(250px, 1fr));
     padding: 2vw;
+    grid-gap: 2vw;
     background: var(--lightGrey);
     border-top: 4px var(--gold) solid;
     border-bottom: 4px var(--gold) solid;
@@ -237,7 +238,6 @@ h1 {
 #featured_books div {
     background-color: white;
     border-radius: 10px;
-    width: 21vw;
     font-size: 2rem;
     padding: 1vw;
     margin-bottom: 1.75vw;
