@@ -30,7 +30,7 @@ const displayClassement = function(data) {
         let html=`
         <div>
             <h1 class='number'>#${i+1}</h1>
-            <a href="#" data-isbn="${book.isbn}" data-slug="${book.slug}" data-tile="${book.title}" class="oneBook"><img src="${book.img}" class="classement_illustration">
+            <a href="#" data-isbn="${book.isbn}" data-slug="${book.slug}" data-title="${book.title}" class="oneBook"><img src="${book.img}" class="classement_illustration">
             <h2>${book.title}</a></h2>
             <h3>By - ${book.author.split(",")[0]}</h3>
             <span>${getStars(book.rating)}${book.rating} (${book.totalratings})</span>
@@ -63,7 +63,7 @@ const displayRecherche= function(data, page) {
             const tags= book.genre.split(",");
             let html=`
             <div>
-            <a href="#" data-isbn="${book.isbn}" data-slug="${book.slug}" class="oneBook"><img src="${book.img}" class="recherche_illustration">
+            <a href="#" data-isbn="${book.isbn}" data-slug="${book.slug}" data-title='${book.title}' class="oneBook"><img src="${book.img}" class="recherche_illustration">
                 <h2>${book.title}</a></h2>
                 <h3>By - ${book.author.split(",")[0]}</h3>
                 <span>${getStars(book.rating)}${book.rating} (${book.totalratings})</span>

@@ -1,5 +1,5 @@
-//const url = "http://127.0.0.1:3000/api/v1";
-const url = "https://bibliotheque-api.herokuapp.com/api/v1";
+const url = "http://127.0.0.1:3000/api/v1";
+//const url = "https://bibliotheque-api.herokuapp.com/api/v1";
 
 const accueilContainer= document.querySelector("#featured_books");
 const oneBook= document.querySelector("#one-book");
@@ -24,7 +24,7 @@ const paginationBar = document.querySelector(".paginationBar");
 
 
 const fetchAccueil= async function(){
-    const data = await fetchThenjson(`${url}/books?page=1&limit=21&fields=author,title,img,isbn,rating,totalratings, slug`);
+    const data = await fetchThenjson(`${url}/books?page=1&limit=21&fields=author,title,img,isbn,rating,totalratings,slug`);
     displayAccueil(data);
     window.history.pushState({location: "acceuil", data}, "accueil", "/");
 }
@@ -93,7 +93,8 @@ const fetchOneBook= async function(event) {
     const target=event.target.closest("a");
     const isbn=target.dataset.isbn
     const slug=target.dataset.slug
-    const title=target.dataset.title;
+    let title=target.innerText;
+    if (!title) title=target.dataset.title;
 
     let data;
     if (isbn) {
@@ -102,9 +103,10 @@ const fetchOneBook= async function(event) {
         data=await fetchThenjson(`${url}/books/${slug}`);
     }
     const googleData = await fetchThenjson(
-        `https://www.googleapis.com/books/v1/volumes?q=${title}&maxResults=1&langRestrict="fr"`);
-
+        `https://www.googleapis.com/books/v1/volumes?q=${title}&maxResults=1&langRestrict=fr`);
+    console.log(googleData);
     data= {...data, ...{googleData : googleData.items[0].volumeInfo} }
+    console.log(googleData);
     displayOneBook(data);
 
     window.history.pushState({location: "book", data}, `${data.requestedBook.title}`, `/book/${data.requestedBook.slug}`);
